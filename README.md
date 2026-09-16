@@ -79,3 +79,17 @@ asynchrone comme un appel réseau. Pour brancher Supabase :
 Les images (`Photo.src`) deviendront des URL Supabase Storage sans changement
 de composant. Le fichier `public/_redirects` prépare l'hébergement statique
 (type Cloudflare Pages) pour les routes de l'application monopage.
+
+## Publier sur GitHub Pages (gratuit)
+
+Le workflow `.github/workflows/deploy-pages.yml` construit et publie le site
+à chaque poussée sur la branche. À activer une seule fois dans le dépôt :
+
+1. GitHub → **Settings → Pages** → Source : **GitHub Actions**.
+2. Pousser (ou relancer le workflow depuis l'onglet Actions).
+3. Le site est servi sur `https://<compte>.github.io/KAAY/`.
+
+Détails : la base d'URL est passée au build par `VITE_BASE=/KAAY/`
+(`vite.config.ts`) et reprise comme `basename` du routeur (`src/main.tsx`) ;
+`404.html` recopie `index.html` pour que les adresses profondes
+(`/restaurant/...`) chargent bien l'application. En local, rien ne change.
