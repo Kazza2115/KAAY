@@ -124,9 +124,8 @@ main {
   position: sticky;
   top: 0;
   z-index: 20;
-  background: rgba(255, 255, 255, 0.82);
-  backdrop-filter: blur(14px) saturate(1.5);
-  -webkit-backdrop-filter: blur(14px) saturate(1.5);
+  /* Opaque : le contenu qui défile ne transparaît jamais sous le logo. */
+  background: var(--surface);
   border-bottom: 1px solid var(--trait);
 }
 
@@ -395,6 +394,7 @@ main {
 
 .resultats-entete {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
@@ -539,7 +539,7 @@ main {
 
 .carte-entete {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
   gap: 10px;
 }
@@ -547,6 +547,14 @@ main {
 .carte-nom {
   font-size: 1.12rem;
   font-weight: 700;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+/* La pastille d'état ne s'écrase jamais contre un nom long. */
+.carte-entete .statut {
+  flex-shrink: 0;
+  margin-top: 2px;
 }
 
 .carte-sous-titre {
@@ -736,6 +744,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
   margin: 16px 0;
 }
 
@@ -873,6 +882,16 @@ main {
   gap: 14px;
   padding: 10px 0;
   border-bottom: 1px dashed var(--trait);
+}
+
+/* Nom de plat long : il se replie au lieu de pousser le prix. */
+.ligne-plat > div:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.ligne-plat .plat-prix {
+  flex-shrink: 0;
 }
 
 .ligne-plat:last-child {
