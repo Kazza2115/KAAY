@@ -14,6 +14,7 @@ import {
 } from '../lib/horaires'
 import { ActionsContact } from '../components/ActionsContact'
 import { BadgeDemo } from '../components/BadgeDemo'
+import { BoutonPartager } from '../components/BoutonPartager'
 import { LienSignalement } from '../components/LienSignalement'
 import { PhotoRestaurant } from '../components/PhotoRestaurant'
 import { StatutOuvertureBadge } from '../components/StatutOuvertureBadge'
@@ -56,6 +57,14 @@ export function FicheRestaurant() {
 
   const restaurant = charge?.slug === (slug ?? '') ? charge.restaurant : undefined
 
+  // Chaque fiche est une vraie page : titre d'onglet dédié, restauré au départ.
+  useEffect(() => {
+    if (restaurant) document.title = `${restaurant.nom} — Kaay`
+    return () => {
+      document.title = 'Kaay — Où manger à Dakar'
+    }
+  }, [restaurant])
+
   if (restaurant === null) return <PageIntrouvable />
   if (restaurant === undefined) {
     return (
@@ -88,12 +97,15 @@ export function FicheRestaurant() {
 
   return (
     <div className="page fiche">
-      <button type="button" className="lien-retour" onClick={retour}>
-        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
-          <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-        Résultats
-      </button>
+      <div className="fiche-barre">
+        <button type="button" className="lien-retour" onClick={retour}>
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+            <path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+          Résultats
+        </button>
+        <BoutonPartager titre={`${restaurant.nom} — Kaay`} />
+      </div>
 
       <div
         className={`galerie ${restaurant.photos.length > 1 ? 'galerie-multiple' : ''}`}

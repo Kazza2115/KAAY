@@ -649,11 +649,17 @@ main {
   margin: 0 auto;
 }
 
+.fiche-barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 16px 0;
+}
+
 .lien-retour {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin: 16px 0;
   padding: 8px 14px 8px 10px;
   border: none;
   border-radius: 999px;
