@@ -19,7 +19,7 @@ export function ActionsContact({ restaurant }: Props) {
 
   const lienWhatsApp = restaurant.whatsapp
     ? `https://wa.me/${restaurant.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
-        `Bonjour ${restaurant.nom}, je vous ai trouvé sur Kaay. Êtes-vous ouverts en ce moment ?`,
+        `Bonjour ${restaurant.nom}, j'ai trouvé votre restaurant sur Kaay. Êtes-vous ouverts en ce moment ?`,
       )}`
     : null
   const lienAppel = restaurant.telephone ? `tel:${restaurant.telephone}` : null
@@ -49,7 +49,7 @@ export function ActionsContact({ restaurant }: Props) {
             auClic(e, {
               titre: `Écrire à ${restaurant.nom} sur WhatsApp`,
               explication:
-                'En production, WhatsApp s’ouvrirait avec un message prêt à envoyer au restaurant.',
+                "En production, WhatsApp s'ouvrirait avec un message prêt à envoyer au restaurant.",
               cible: lienWhatsApp,
             })
           }
@@ -96,7 +96,7 @@ export function ActionsContact({ restaurant }: Props) {
             auClic(e, {
               titre: `Itinéraire vers ${restaurant.nom}`,
               explication:
-                'En production, votre application de cartes s’ouvrirait avec le trajet vers le restaurant.',
+                "En production, votre application de cartes s'ouvrirait avec le trajet vers le restaurant.",
               cible: lienItineraire,
             })
           }
@@ -114,6 +114,21 @@ export function ActionsContact({ restaurant }: Props) {
           <IconeItineraire />
           Itinéraire
         </button>
+      )}
+      {/* Explication visible des boutons désactivés : sur mobile, l'attribut
+          title ne s'affiche jamais au toucher. */}
+      {(!restaurant.whatsapp || !restaurant.telephone || lienItineraire === null) && (
+        <p className="note-discrete actions-note">
+          {[
+            !restaurant.whatsapp ? 'WhatsApp non renseigné pour cette fiche.' : null,
+            !restaurant.telephone ? 'Téléphone non renseigné.' : null,
+            lienItineraire === null
+              ? 'Itinéraire indisponible : localisation en cours de vérification.'
+              : null,
+          ]
+            .filter(Boolean)
+            .join(' ')}
+        </p>
       )}
       <ModaleSimulation contenu={simulation} onFermer={() => setSimulation(null)} />
     </div>

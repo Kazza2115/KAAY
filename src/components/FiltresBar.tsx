@@ -65,21 +65,29 @@ export function FiltresBar({ criteres, quartiers, cuisines, onChange }: Props) {
         </label>
       </div>
 
-      <div className="filtres-chips" role="group" aria-label="Budget par plat">
-        {TRANCHES_BUDGET.map((tranche) => {
-          const active = criteres.budget?.id === tranche.id
-          return (
-            <button
-              key={tranche.id}
-              type="button"
-              className={`chip ${active ? 'chip-active' : ''}`}
-              aria-pressed={active}
-              onClick={() => onChange({ ...criteres, budget: active ? null : tranche })}
-            >
-              {tranche.libelle}
-            </button>
-          )
-        })}
+      <div className="groupe-budget">
+        <span className="select-etiquette" id="etiquette-budget">
+          Budget par plat (FCFA)
+        </span>
+        <div className="filtres-chips" role="group" aria-labelledby="etiquette-budget">
+          {TRANCHES_BUDGET.map((tranche) => {
+            const active = criteres.budget?.id === tranche.id
+            return (
+              <button
+                key={tranche.id}
+                type="button"
+                className={`chip ${active ? 'chip-active' : ''}`}
+                aria-pressed={active}
+                onClick={() => onChange({ ...criteres, budget: active ? null : tranche })}
+              >
+                {tranche.libelle}
+              </button>
+            )
+          })}
+        </div>
+      </div>
+
+      <div className="filtres-chips">
         <button
           type="button"
           className={`chip ${criteres.aEmporter ? 'chip-active' : ''}`}

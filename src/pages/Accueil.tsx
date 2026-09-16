@@ -11,21 +11,34 @@ import {
   filtrerRestaurants,
   quartiersDisponibles,
 } from '../lib/filtres'
+import { useMaintenant } from '../lib/useMaintenant'
 import { FiltresBar } from '../components/FiltresBar'
 import { RestaurantCard } from '../components/RestaurantCard'
 import { EtatVide } from '../components/EtatVide'
 
 /**
+ * Dernière liste chargée, conservée au niveau du module : au retour depuis
+ * une fiche, la grille se ré-affiche immédiatement (et la position de
+ * défilement se restaure) même quand le fournisseur passera par le réseau.
+ */
+let cacheRestaurants: Restaurant[] | null = null
+
+/**
  * Accueil : recherche, filtres et liste des résultats.
  * Les critères vivent dans l'URL pour survivre au retour depuis une fiche.
+ * Le texte de recherche est doublé dans un état local : React Router met à
+ * jour l'URL dans une transition, ce qui ne convient pas à un champ contrôlé.
  */
 export function Accueil() {
-  const [restaurants, setRestaurants] = useState<Restaurant[] | null>(null)
+  const [restaurants, setRestaurants] = useState<Restaurant[] | null>(() => cacheRestaurants)
   const [parametres, setParametres] = useSearchParams()
+  const [texteRecherche, setTexteRecherche] = useState(() => parametres.get('q') ?? '')
+  const maintenant = useMaintenant()
 
   useEffect(() => {
     let actif = true
     fournisseur.listerRestaurants().then((liste) => {
+      cacheRestaurants = liste
       if (actif) setRestaurants(liste)
     })
     return () => {
@@ -33,37 +46,65 @@ export function Accueil() {
     }
   }, [])
 
+  // Recopie différée du texte de recherche vers l'URL (persistance seulement :
+  // le filtrage se fait sur l'état local, sans attendre).
+  useEffect(() => {
+    const minuterie = setTimeout(() => {
+      setParametres(
+        (precedents) => {
+          const p = new URLSearchParams(precedents)
+          if (texteRecherche) p.set('q', texteRecherche)
+          else p.delete('q')
+          return p
+        },
+        { replace: true },
+      )
+    }, 250)
+    return () => clearTimeout(minuterie)
+  }, [texteRecherche, setParametres])
+
   const criteres: Criteres = useMemo(
     () => ({
-      recherche: parametres.get('q') ?? '',
+      recherche: texteRecherche,
       quartier: parametres.get('quartier'),
       cuisine: parametres.get('cuisine'),
       budget: TRANCHES_BUDGET.find((t) => t.id === parametres.get('budget')) ?? null,
       aEmporter: parametres.get('emporter') === '1',
     }),
-    [parametres],
+    [parametres, texteRecherche],
   )
   const tri: Tri = parametres.get('tri') === 'alphabetique' ? 'alphabetique' : 'pertinence'
 
   function majCriteres(suivants: Criteres) {
-    const p = new URLSearchParams(parametres)
-    const poser = (cle: string, valeur: string | null) => {
-      if (valeur) p.set(cle, valeur)
-      else p.delete(cle)
-    }
-    poser('q', suivants.recherche || null)
-    poser('quartier', suivants.quartier)
-    poser('cuisine', suivants.cuisine)
-    poser('budget', suivants.budget?.id ?? null)
-    poser('emporter', suivants.aEmporter ? '1' : null)
-    setParametres(p, { replace: true })
+    if (suivants.recherche !== texteRecherche) setTexteRecherche(suivants.recherche)
+    setParametres(
+      (precedents) => {
+        const p = new URLSearchParams(precedents)
+        const poser = (cle: string, valeur: string | null) => {
+          if (valeur) p.set(cle, valeur)
+          else p.delete(cle)
+        }
+        poser('q', suivants.recherche || null)
+        poser('quartier', suivants.quartier)
+        poser('cuisine', suivants.cuisine)
+        poser('budget', suivants.budget?.id ?? null)
+        poser('emporter', suivants.aEmporter ? '1' : null)
+        return p
+      },
+      { replace: true },
+    )
   }
 
   function majTri(suivant: Tri) {
-    const p = new URLSearchParams(parametres)
-    if (suivant === 'alphabetique') p.set('tri', suivant)
-    else p.delete('tri')
-    setParametres(p, { replace: true })
+    setParametres(
+      (precedents) => {
+        const p = new URLSearchParams(precedents)
+        if (suivant === 'alphabetique') p.set('tri', suivant)
+        else p.delete('tri')
+        return p
+      },
+      { replace: true },
+    )
   }
 
   const resultats = useMemo(
@@ -88,10 +129,17 @@ export function Accueil() {
         onChange={majCriteres}
       />
 
+      {/* Région live permanente : annonce le décompte aux lecteurs d'écran. */}
+      <p className="sr-only" role="status">
+        {restaurants === null
+          ? 'Chargement des restaurants'
+          : `${resultats.length} restaurant${resultats.length > 1 ? 's' : ''} trouvé${
+              resultats.length > 1 ? 's' : ''
+            }`}
+      </p>
+
       {restaurants === null ? (
-        <p className="chargement" role="status">
-          Chargement des restaurants…
-        </p>
+        <p className="chargement">Chargement des restaurants…</p>
       ) : resultats.length === 0 ? (
         <EtatVide onEffacerFiltres={() => majCriteres(CRITERES_VIDES)} />
       ) : (
@@ -110,7 +158,7 @@ export function Accueil() {
           </div>
           <ul className="grille-cartes">
             {resultats.map((r) => (
-              <RestaurantCard key={r.id} restaurant={r} />
+              <RestaurantCard key={r.id} restaurant={r} maintenant={maintenant} />
             ))}
           </ul>
         </section>

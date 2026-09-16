@@ -73,13 +73,17 @@ function plageCouvre(plage: PlageHoraire, jour: Jour, minutes: number): boolean 
   return (plage.jour === jour && minutes >= debut) || (plage.jour === veille && minutes < fin)
 }
 
-/** Prochaine ouverture (texte court) après l'instant donné, ou `null`. */
+/**
+ * Prochaine ouverture (texte court) après l'instant donné, ou `null`.
+ * `decalage` va jusqu'à 7 inclus pour retomber sur le jour courant de la
+ * semaine suivante (restaurant ouvert un seul jour, consulté après l'heure).
+ */
 function prochaineOuverture(
   plages: PlageHoraire[],
   jour: Jour,
   minutes: number,
 ): string | null {
-  for (let decalage = 0; decalage < 7; decalage++) {
+  for (let decalage = 0; decalage <= 7; decalage++) {
     const j = ((jour + decalage) % 7) as Jour
     const duJour = plages
       .filter((p) => p.jour === j)

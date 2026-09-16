@@ -29,7 +29,7 @@ export function joursDepuis(dateIso: string | null): number | null {
   return Math.max(0, Math.round((minuitUtc - alors) / 86_400_000))
 }
 
-/** Vrai si l'information a été confirmée il y a moins de 14 jours. */
+/** Vrai si l'information a été confirmée il y a au plus 14 jours (au-delà, elle est à reconfirmer). */
 export function estRecente(dateIso: string | null): boolean {
   const jours = joursDepuis(dateIso)
   return jours !== null && jours <= DELAI_FRAICHEUR_JOURS

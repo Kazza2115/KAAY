@@ -4,10 +4,12 @@ import { normaliser } from './format'
 
 /** Recherche et filtres de l'accueil : quartier, cuisine, budget, à emporter. */
 
+// Les bornes sont inclusives : les libellés l'assument (un plat à 2 500 F
+// relève à la fois de « Jusqu'à 2 500 F » et de « 2 500 à 5 000 F »).
 export const TRANCHES_BUDGET: TrancheBudget[] = [
-  { id: 'petit', libelle: 'Moins de 2 500 F', min: 0, max: 2500 },
+  { id: 'petit', libelle: "Jusqu'à 2 500 F", min: 0, max: 2500 },
   { id: 'moyen', libelle: '2 500 à 5 000 F', min: 2500, max: 5000 },
-  { id: 'confort', libelle: 'Plus de 5 000 F', min: 5000, max: null },
+  { id: 'confort', libelle: '5 000 F et plus', min: 5000, max: null },
 ]
 
 export interface Criteres {
@@ -87,15 +89,20 @@ export function filtrerRestaurants(
   )
 }
 
+/** Seules les fiches publiées alimentent les résultats et les filtres. */
+function publies(restaurants: Restaurant[]): Restaurant[] {
+  return restaurants.filter((r) => r.statut === 'publie')
+}
+
 /** Valeurs distinctes pour alimenter les listes de filtres. */
 export function quartiersDisponibles(restaurants: Restaurant[]): string[] {
-  return [...new Set(restaurants.map((r) => r.quartier))].sort((a, b) =>
+  return [...new Set(publies(restaurants).map((r) => r.quartier))].sort((a, b) =>
     a.localeCompare(b, 'fr'),
   )
 }
 
 export function cuisinesDisponibles(restaurants: Restaurant[]): string[] {
-  return [...new Set(restaurants.flatMap((r) => r.cuisines))].sort((a, b) =>
+  return [...new Set(publies(restaurants).flatMap((r) => r.cuisines))].sort((a, b) =>
     a.localeCompare(b, 'fr'),
   )
 }

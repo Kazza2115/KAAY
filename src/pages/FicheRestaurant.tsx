@@ -3,6 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import type { Jour, Plat, Restaurant } from '../types'
 import { fournisseur } from '../data/provider'
 import { estRecente, formatDepuis } from '../lib/dates'
+import { useMaintenant } from '../lib/useMaintenant'
 import { formatFcfa, formatTelephone } from '../lib/format'
 import {
   JOURS_LONGS,
@@ -35,6 +36,7 @@ const NOMS_CATEGORIES: Record<Plat['categorie'], string> = {
 export function FicheRestaurant() {
   const { slug } = useParams<{ slug: string }>()
   const navigate = useNavigate()
+  const maintenant = useMaintenant()
   // `restaurant` vaut `undefined` pendant le chargement, `null` si introuvable.
   const [charge, setCharge] = useState<{ slug: string; restaurant: Restaurant | null }>()
 
@@ -77,8 +79,12 @@ export function FicheRestaurant() {
       ORDRE_CATEGORIES[a.categorie] - ORDRE_CATEGORIES[b.categorie] ||
       a.nom.localeCompare(b.nom, 'fr'),
   )
-  const jourCourant = jourCourantADakar()
+  const jourCourant = jourCourantADakar(maintenant)
   const horairesRecents = estRecente(restaurant.horairesConfirmesLe)
+  const services = [
+    restaurant.surPlace ? 'Sur place' : null,
+    restaurant.aEmporter ? 'À emporter' : null,
+  ].filter(Boolean)
 
   return (
     <div className="page fiche">
@@ -89,7 +95,13 @@ export function FicheRestaurant() {
         Résultats
       </button>
 
-      <div className={`galerie ${restaurant.photos.length > 1 ? 'galerie-multiple' : ''}`}>
+      <div
+        className={`galerie ${restaurant.photos.length > 1 ? 'galerie-multiple' : ''}`}
+        // Zone défilable : focusable et nommée quand il y a plusieurs photos.
+        {...(restaurant.photos.length > 1
+          ? { tabIndex: 0, role: 'group', 'aria-label': `Photos de ${restaurant.nom}` }
+          : {})}
+      >
         {restaurant.photos.length === 0 ? (
           <PhotoRestaurant photo={null} className="galerie-photo" />
         ) : (
@@ -107,16 +119,9 @@ export function FicheRestaurant() {
         <p className="fiche-sous-titre">
           {restaurant.quartier} · {restaurant.cuisines.join(', ')}
         </p>
-        <StatutOuvertureBadge statut={statutOuverture(restaurant)} detaille />
+        <StatutOuvertureBadge statut={statutOuverture(restaurant, maintenant)} detaille />
         {restaurant.description && <p className="fiche-description">{restaurant.description}</p>}
-        <p className="fiche-services">
-          {[
-            restaurant.surPlace ? 'Sur place' : null,
-            restaurant.aEmporter ? 'À emporter' : null,
-          ]
-            .filter(Boolean)
-            .join(' · ')}
-        </p>
+        {services.length > 0 && <p className="fiche-services">{services.join(' · ')}</p>}
       </div>
 
       <ActionsContact restaurant={restaurant} />

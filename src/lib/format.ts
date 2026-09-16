@@ -7,11 +7,6 @@ export function formatFcfa(prix: number): string {
   return `${formatNombre.format(prix)} F`
 }
 
-/** « 2 500 FCFA » — le format long, pour les endroits moins denses. */
-export function formatFcfaLong(prix: number): string {
-  return `${formatNombre.format(prix)} FCFA`
-}
-
 /** « +221770000001 » → « +221 77 000 00 01 » pour l'affichage. */
 export function formatTelephone(numero: string): string {
   const chiffres = numero.replace(/[^\d+]/g, '')
@@ -23,12 +18,15 @@ export function formatTelephone(numero: string): string {
 }
 
 /**
- * Normalise un texte pour la recherche : minuscules et sans accents,
- * afin que « thieb » trouve « Thiéboudienne ».
+ * Normalise un texte pour la recherche : minuscules, sans accents ni
+ * ligatures, afin que « thieb » trouve « Thiéboudienne » et que « boeuf »
+ * trouve « bœuf » (la ligature « œ » n'a pas de décomposition Unicode).
  */
 export function normaliser(texte: string): string {
   return texte
     .toLowerCase()
+    .replace(/œ/g, 'oe')
+    .replace(/æ/g, 'ae')
     .normalize('NFD')
     .replace(/[̀-ͯ]/g, '')
     .trim()

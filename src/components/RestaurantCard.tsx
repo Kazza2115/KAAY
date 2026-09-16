@@ -10,10 +10,12 @@ import { StatutOuvertureBadge } from './StatutOuvertureBadge'
 
 interface Props {
   restaurant: Restaurant
+  /** Instant de référence pour l'état ouvert/fermé (rafraîchi par l'appelant). */
+  maintenant: Date
 }
 
 /** Carte de résultat : photo, nom, quartier, cuisine et prix d'un plat. */
-export function RestaurantCard({ restaurant }: Props) {
+export function RestaurantCard({ restaurant, maintenant }: Props) {
   const plat = platRepresentatif(restaurant)
   const prixFiable = plat !== null && estRecente(plat.prixConfirmeLe)
 
@@ -27,7 +29,7 @@ export function RestaurantCard({ restaurant }: Props) {
         <div className="carte-corps">
           <div className="carte-entete">
             <h3 className="carte-nom">{restaurant.nom}</h3>
-            <StatutOuvertureBadge statut={statutOuverture(restaurant)} />
+            <StatutOuvertureBadge statut={statutOuverture(restaurant, maintenant)} />
           </div>
           <p className="carte-sous-titre">
             {restaurant.quartier} · {restaurant.cuisines.join(', ')}
