@@ -132,10 +132,11 @@ main {
 .entete-contenu {
   max-width: 1024px;
   margin: 0 auto;
-  padding: 14px 16px 12px;
+  padding: 12px 16px 10px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 2px;
 }
 
 .marque {
@@ -151,7 +152,8 @@ main {
 .marque-slogan {
   margin: 0;
   color: var(--encre-douce);
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  letter-spacing: 0.01em;
 }
 
 .lisere-senegal {
