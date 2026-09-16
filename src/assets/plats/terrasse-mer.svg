@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <!-- terrasse face à la mer -->
+  <rect width="800" height="600" fill="#CBE4EA"/>
+  <rect y="250" width="800" height="130" fill="#5F9EA8"/>
+  <rect y="250" width="800" height="10" fill="#4E8892"/>
+  <g stroke="#EAF5F7" stroke-width="6" opacity="0.7" fill="none">
+    <path d="M60 300q30-10 60 0M240 322q30-10 60 0M480 296q30-10 60 0M640 330q30-10 60 0"/>
+  </g>
+  <!-- soleil -->
+  <circle cx="640" cy="130" r="52" fill="#F2C94C"/>
+  <!-- sol de la terrasse -->
+  <rect y="380" width="800" height="220" fill="#D8B78A"/>
+  <g stroke="#C4A170" stroke-width="5">
+    <path d="M0 430h800M0 490h800M0 550h800"/>
+  </g>
+  <!-- parasol -->
+  <path d="M150 180l210 0q-40-70-105-70t-105 70z" fill="#E34D3C"/>
+  <path d="M150 180h52q10-46 53-64-70 6-105 64zM308 180h52q-35-58-105-64 43 18 53 64z" fill="#F0EBDD"/>
+  <rect x="250" y="180" width="10" height="230" fill="#8A6B4A"/>
+  <!-- table et tabourets -->
+  <ellipse cx="255" cy="420" rx="105" ry="26" fill="#FBF7EF"/>
+  <rect x="245" y="428" width="20" height="90" fill="#B08D5F"/>
+  <ellipse cx="255" cy="522" rx="60" ry="14" fill="#B08D5F" opacity="0.5"/>
+  <ellipse cx="110" cy="470" rx="42" ry="14" fill="#8A6B4A"/>
+  <rect x="98" y="474" width="24" height="60" fill="#8A6B4A"/>
+  <ellipse cx="404" cy="470" rx="42" ry="14" fill="#8A6B4A"/>
+  <rect x="392" y="474" width="24" height="60" fill="#8A6B4A"/>
+  <!-- plat sur la table -->
+  <ellipse cx="255" cy="410" rx="44" ry="13" fill="#E4E9E9"/>
+  <ellipse cx="252" cy="406" rx="26" ry="8" fill="#C1904D"/>
+  <!-- pirogue au loin -->
+  <path d="M560 292q46 18 92 0l-14 20h-64z" fill="#00853F"/>
+  <path d="M572 296h68" stroke="#FDEF42" stroke-width="6"/>
+  <rect x="602" y="252" width="6" height="42" fill="#6B4F33"/>
+</svg>

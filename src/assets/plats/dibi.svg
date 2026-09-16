@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#E3D3BC"/>
+  <ellipse cx="400" cy="556" rx="330" ry="40" fill="#BCA37F" opacity="0.5"/>
+  <!-- papier kraft déplié -->
+  <path d="M120 190l560-40 30 330-560 60z" fill="#C9A66B"/>
+  <path d="M150 214l500-34 24 282-500 52z" fill="#D8B87E"/>
+  <path d="M120 190l70 130-40 190M680 150l-40 160 70 130" stroke="#B4914F" stroke-width="6" fill="none" opacity="0.6"/>
+  <!-- dibi : morceaux grillés -->
+  <g>
+    <ellipse cx="330" cy="300" rx="72" ry="48" fill="#6E3B1E" transform="rotate(-10 330 300)"/>
+    <ellipse cx="326" cy="294" rx="62" ry="40" fill="#8A4C26" transform="rotate(-10 326 294)"/>
+    <ellipse cx="452" cy="286" rx="64" ry="42" fill="#5F3218" transform="rotate(12 452 286)"/>
+    <ellipse cx="448" cy="280" rx="55" ry="35" fill="#7C4321" transform="rotate(12 448 280)"/>
+    <ellipse cx="392" cy="380" rx="76" ry="48" fill="#6E3B1E" transform="rotate(4 392 380)"/>
+    <ellipse cx="388" cy="374" rx="66" ry="40" fill="#8A4C26" transform="rotate(4 388 374)"/>
+    <ellipse cx="512" cy="392" rx="58" ry="38" fill="#5F3218" transform="rotate(-8 512 392)"/>
+    <ellipse cx="508" cy="386" rx="49" ry="31" fill="#7C4321" transform="rotate(-8 508 386)"/>
+  </g>
+  <!-- oignons crus -->
+  <g fill="none" stroke="#EED9EF" stroke-width="8">
+    <circle cx="280" cy="400" r="26"/><circle cx="318" cy="432" r="18"/><circle cx="560" cy="300" r="22"/>
+  </g>
+  <!-- moutarde et piment -->
+  <ellipse cx="248" cy="330" rx="34" ry="22" fill="#E2B33C"/>
+  <ellipse cx="252" cy="326" rx="26" ry="16" fill="#F2C94C"/>
+  <ellipse cx="580" cy="428" rx="22" ry="12" transform="rotate(-20 580 428)" fill="#C0341D"/>
+</svg>

@@ -1,0 +1,3 @@
+# Application monopage : toutes les routes servent index.html
+# (utile pour un futur hébergement statique type Cloudflare Pages).
+/* /index.html 200

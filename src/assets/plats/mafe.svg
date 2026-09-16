@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#EFD9C4"/>
+  <ellipse cx="400" cy="560" rx="310" ry="40" fill="#CBA985" opacity="0.5"/>
+  <!-- bol de mafé -->
+  <ellipse cx="290" cy="330" rx="215" ry="150" fill="#8C4A2F"/>
+  <ellipse cx="290" cy="318" rx="200" ry="136" fill="#A65A38"/>
+  <ellipse cx="290" cy="316" rx="172" ry="112" fill="#B4713C"/>
+  <ellipse cx="290" cy="314" rx="160" ry="102" fill="#C58544"/>
+  <!-- morceaux de viande et légumes -->
+  <g>
+    <ellipse cx="235" cy="290" rx="44" ry="30" fill="#7C4327" transform="rotate(-12 235 290)"/>
+    <ellipse cx="330" cy="270" rx="38" ry="26" fill="#8A4C2C" transform="rotate(14 330 270)"/>
+    <ellipse cx="300" cy="350" rx="42" ry="28" fill="#7C4327" transform="rotate(6 300 350)"/>
+    <ellipse cx="212" cy="352" rx="30" ry="20" fill="#E8862D" transform="rotate(-18 212 352)"/>
+    <ellipse cx="372" cy="330" rx="26" ry="18" fill="#E8862D" transform="rotate(20 372 330)"/>
+  </g>
+  <path d="M180 260q28-16 52-6M356 386q24 10 46-2" stroke="#DFA050" stroke-width="8" fill="none" stroke-linecap="round"/>
+  <!-- bol de riz blanc -->
+  <ellipse cx="590" cy="400" rx="150" ry="104" fill="#DCCDB4"/>
+  <ellipse cx="590" cy="390" rx="138" ry="92" fill="#F4EDDE"/>
+  <ellipse cx="590" cy="382" rx="112" ry="70" fill="#FBF6EA"/>
+  <g fill="#E9DDC2">
+    <ellipse cx="540" cy="362" rx="12" ry="5" transform="rotate(-18 540 362)"/>
+    <ellipse cx="600" cy="348" rx="12" ry="5" transform="rotate(12 600 348)"/>
+    <ellipse cx="646" cy="376" rx="12" ry="5" transform="rotate(-8 646 376)"/>
+    <ellipse cx="576" cy="400" rx="12" ry="5" transform="rotate(22 576 400)"/>
+    <ellipse cx="628" cy="412" rx="12" ry="5" transform="rotate(-26 628 412)"/>
+  </g>
+  <!-- persil -->
+  <g fill="#5B8C3E">
+    <circle cx="262" cy="242" r="9"/><circle cx="278" cy="234" r="8"/><circle cx="272" cy="250" r="7"/>
+  </g>
+</svg>

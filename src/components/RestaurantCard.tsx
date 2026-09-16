@@ -1,0 +1,55 @@
+import { Link } from 'react-router-dom'
+import type { Restaurant } from '../types'
+import { estRecente, formatDepuis } from '../lib/dates'
+import { platRepresentatif } from '../lib/filtres'
+import { formatFcfa } from '../lib/format'
+import { statutOuverture } from '../lib/horaires'
+import { BadgeDemo } from './BadgeDemo'
+import { PhotoRestaurant } from './PhotoRestaurant'
+import { StatutOuvertureBadge } from './StatutOuvertureBadge'
+
+interface Props {
+  restaurant: Restaurant
+}
+
+/** Carte de résultat : photo, nom, quartier, cuisine et prix d'un plat. */
+export function RestaurantCard({ restaurant }: Props) {
+  const plat = platRepresentatif(restaurant)
+  const prixFiable = plat !== null && estRecente(plat.prixConfirmeLe)
+
+  return (
+    <li className="carte">
+      <Link to={`/restaurant/${restaurant.slug}`} className="carte-lien">
+        <div className="carte-photo">
+          <PhotoRestaurant photo={restaurant.photos[0] ?? null} className="carte-image" />
+          {restaurant.estDemo && <BadgeDemo />}
+        </div>
+        <div className="carte-corps">
+          <div className="carte-entete">
+            <h3 className="carte-nom">{restaurant.nom}</h3>
+            <StatutOuvertureBadge statut={statutOuverture(restaurant)} />
+          </div>
+          <p className="carte-sous-titre">
+            {restaurant.quartier} · {restaurant.cuisines.join(', ')}
+            {restaurant.aEmporter && <span className="carte-emporter"> · À emporter</span>}
+          </p>
+          {plat && plat.prixFcfa !== null ? (
+            <p className="carte-prix">
+              <span className="carte-plat">{plat.nom}</span>
+              <span className="carte-montant">{formatFcfa(plat.prixFcfa)}</span>
+            </p>
+          ) : (
+            <p className="carte-prix carte-prix-absent">Prix à confirmer</p>
+          )}
+          {plat && plat.prixFcfa !== null && (
+            <p className={`carte-fraicheur ${prixFiable ? '' : 'carte-fraicheur-perimee'}`}>
+              {prixFiable
+                ? `Prix vérifié ${formatDepuis(plat.prixConfirmeLe) ?? ''}`
+                : 'Prix à reconfirmer'}
+            </p>
+          )}
+        </div>
+      </Link>
+    </li>
+  )
+}

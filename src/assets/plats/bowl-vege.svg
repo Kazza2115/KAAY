@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#E7E9D5"/>
+  <ellipse cx="400" cy="556" rx="300" ry="40" fill="#B8BC97" opacity="0.5"/>
+  <!-- bol -->
+  <path d="M140 300q0 200 260 200t260-200z" fill="#CE7B52"/>
+  <path d="M170 300q0 172 230 172t230-172z" fill="#E08D60"/>
+  <ellipse cx="400" cy="300" rx="260" ry="70" fill="#B4643E"/>
+  <ellipse cx="400" cy="294" rx="238" ry="60" fill="#FBF6EA"/>
+  <!-- fonio -->
+  <path d="M162 294a238 60 0 0 1 158-56l14 70-96 40q-56-18-76-54z" fill="#EAD9A8"/>
+  <!-- avocat -->
+  <g transform="rotate(-14 306 270)">
+    <ellipse cx="306" cy="270" rx="52" ry="34" fill="#7FA05A"/>
+    <ellipse cx="306" cy="268" rx="42" ry="26" fill="#C4D68A"/>
+    <circle cx="306" cy="270" r="13" fill="#8A5A32"/>
+  </g>
+  <!-- tomates -->
+  <g fill="#E34D3C">
+    <circle cx="430" cy="262" r="24"/><circle cx="478" cy="278" r="20"/>
+  </g>
+  <g fill="#F08072"><circle cx="424" cy="256" r="9"/><circle cx="473" cy="272" r="7"/></g>
+  <!-- verdure -->
+  <g fill="#5B8C3E">
+    <path d="M520 262q28-22 54-6-8 26-40 26-16 0-14-20z"/>
+    <path d="M548 292q30-14 50 4-14 22-42 16-14-4-8-20z"/>
+    <path d="M494 240q18-24 44-16 0 26-28 30-18 2-16-14z"/>
+  </g>
+  <!-- carotte râpée -->
+  <g stroke="#E8862D" stroke-width="8" stroke-linecap="round" fill="none">
+    <path d="M356 316q18-10 38-4M348 334q22-12 46-4M368 350q18-8 36-4"/>
+  </g>
+  <!-- graines -->
+  <g fill="#8A5A32">
+    <circle cx="452" cy="316" r="5"/><circle cx="470" cy="330" r="5"/><circle cx="488" cy="316" r="5"/>
+    <circle cx="506" cy="330" r="5"/><circle cx="466" cy="346" r="5"/>
+  </g>
+</svg>

@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img">
+  <rect width="800" height="600" fill="#EFDFC8"/>
+  <ellipse cx="400" cy="556" rx="320" ry="42" fill="#CDB490" opacity="0.5"/>
+  <ellipse cx="400" cy="350" rx="330" ry="200" fill="#F7F1E4"/>
+  <ellipse cx="400" cy="342" rx="300" ry="175" fill="#FDF9F0"/>
+  <!-- trois brochettes -->
+  <g transform="rotate(-14 400 330)">
+    <rect x="140" y="246" width="520" height="9" rx="4.5" fill="#C8A46B"/>
+    <g transform="translate(0 250)">
+      <ellipse cx="250" cy="0" rx="46" ry="34" fill="#9E5B2E"/>
+      <ellipse cx="340" cy="0" rx="30" ry="30" fill="#E34D3C"/>
+      <ellipse cx="424" cy="0" rx="46" ry="34" fill="#B06A36"/>
+      <ellipse cx="508" cy="0" rx="28" ry="28" fill="#5B8C3E"/>
+      <ellipse cx="580" cy="0" rx="42" ry="32" fill="#9E5B2E"/>
+    </g>
+  </g>
+  <g transform="rotate(-6 400 400)">
+    <rect x="150" y="356" width="520" height="9" rx="4.5" fill="#C8A46B"/>
+    <g transform="translate(0 360)">
+      <ellipse cx="256" cy="0" rx="44" ry="33" fill="#B06A36"/>
+      <ellipse cx="342" cy="0" rx="28" ry="28" fill="#F2A93B"/>
+      <ellipse cx="424" cy="0" rx="46" ry="34" fill="#9E5B2E"/>
+      <ellipse cx="506" cy="0" rx="28" ry="28" fill="#E34D3C"/>
+      <ellipse cx="580" cy="0" rx="40" ry="31" fill="#B06A36"/>
+    </g>
+  </g>
+  <g transform="rotate(3 400 470)">
+    <rect x="170" y="452" width="500" height="9" rx="4.5" fill="#C8A46B"/>
+    <g transform="translate(0 456)">
+      <ellipse cx="270" cy="0" rx="42" ry="31" fill="#9E5B2E"/>
+      <ellipse cx="352" cy="0" rx="27" ry="27" fill="#5B8C3E"/>
+      <ellipse cx="430" cy="0" rx="44" ry="33" fill="#B06A36"/>
+      <ellipse cx="510" cy="0" rx="27" ry="27" fill="#F2A93B"/>
+    </g>
+  </g>
+  <!-- oignons frais -->
+  <g fill="none" stroke="#E5CBE9" stroke-width="7">
+    <circle cx="606" cy="452" r="20"/><circle cx="646" cy="430" r="15"/>
+  </g>
+</svg>
