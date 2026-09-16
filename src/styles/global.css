@@ -18,14 +18,15 @@
   --rouge-encre: #971117;
   --rouge-pale: #fcebec;
 
-  --fond: #faf7f1;
+  /* Fond neutre froid, très clair : épuré, met les photos en avant. */
+  --fond: #f4f6f7;
   --surface: #ffffff;
-  --encre: #23211a;
-  --encre-douce: #625d4f;
-  --trait: #e9e3d6;
+  --encre: #1e2427;
+  --encre-douce: #59626a;
+  --trait: #e3e8eb;
 
-  --ombre: 0 1px 2px rgba(46, 38, 20, 0.05), 0 5px 16px rgba(46, 38, 20, 0.07);
-  --ombre-haute: 0 2px 4px rgba(46, 38, 20, 0.07), 0 12px 28px rgba(46, 38, 20, 0.12);
+  --ombre: 0 1px 2px rgba(23, 32, 38, 0.05), 0 5px 16px rgba(23, 32, 38, 0.07);
+  --ombre-haute: 0 2px 4px rgba(23, 32, 38, 0.07), 0 12px 28px rgba(23, 32, 38, 0.13);
   --rayon: 16px;
   --rayon-petit: 10px;
 
@@ -416,7 +417,7 @@ main {
 .carte-photo {
   position: relative;
   aspect-ratio: 16 / 10;
-  background: #efe9dc;
+  background: #eaeef0;
   overflow: hidden;
 }
 
@@ -545,7 +546,7 @@ main {
 }
 
 .statut-inconnu {
-  background: #f0ece2;
+  background: #eceff1;
   color: var(--encre-douce);
 }
 
@@ -706,7 +707,7 @@ main {
   color: var(--encre-douce);
   background:
     repeating-linear-gradient(-45deg, transparent 0 14px, rgba(0, 0, 0, 0.025) 14px 28px),
-    #efe9dc;
+    #eaeef0;
   font-size: 0.85rem;
   font-weight: 600;
 }
@@ -914,7 +915,7 @@ main {
 }
 
 .modale::backdrop {
-  background: rgba(30, 24, 10, 0.45);
+  background: rgba(18, 26, 31, 0.45);
   backdrop-filter: blur(3px);
   -webkit-backdrop-filter: blur(3px);
   animation: fondu 0.25s ease both;
@@ -1017,7 +1018,7 @@ main {
 }
 
 .squelette {
-  background: linear-gradient(90deg, #efe9dc 25%, #f7f3ea 45%, #efe9dc 65%);
+  background: linear-gradient(90deg, #eaeef0 25%, #f4f7f8 45%, #eaeef0 65%);
   background-size: 200% 100%;
   animation: chatoiement 1.4s linear infinite;
   border-radius: 8px;
