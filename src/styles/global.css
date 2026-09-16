@@ -257,10 +257,11 @@ main {
   transform: scale(0.92);
 }
 
+/* Les illustrations étant en couleurs, la sélection s'exprime par un
+   anneau vert plutôt qu'un aplat qui les masquerait. */
 .categorie-active .categorie-icone {
-  background: var(--vert);
-  border-color: var(--vert);
-  color: #ffffff;
+  background: var(--vert-pale);
+  border: 2px solid var(--vert);
 }
 
 .categorie-nom {

@@ -1,6 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <!-- Le « a » du logo Kaay : disque vert, épingle blanche, point jaune. -->
-  <circle cx="32" cy="32" r="30" fill="#00853F"/>
-  <path d="M32 55 C 22.5 43 17.5 33.2 17.5 26 a14.5 14.5 0 1 1 29 0 c0 7.2 -5 17 -14.5 29 z" fill="#FFFFFF"/>
-  <circle cx="32" cy="26" r="7" fill="#F5B301"/>
+  <!-- Favicon Kaay : squircle vert à deux tons, épingle du logo en relief. -->
+  <rect width="64" height="64" rx="16" fill="#00853F"/>
+  <path d="M0 34C10 28 22 25 32 25s22 3 32 9v14a16 16 0 0 1-16 16H16A16 16 0 0 1 0 48z" fill="#006B33"/>
+  <path d="M32 53C21.5 40 16 29.5 16 21.5a16 16 0 1 1 32 0C48 29.5 42.5 40 32 53z" fill="#FFFFFF"/>
+  <path d="M32 51.5c-2-2.6-3.9-5.1-5.5-7.6C21 36 18 28.7 18 21.5A14 14 0 0 1 32 7.5z" fill="#F2F5F3"/>
+  <circle cx="32" cy="21.5" r="7.2" fill="#F5B301"/>
+  <circle cx="30" cy="19.5" r="2.2" fill="#FBD35C"/>
 </svg>
