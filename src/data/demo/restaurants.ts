@@ -57,6 +57,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
       { id: 'demo-1-p4', nom: 'Bissap frais', categorie: 'boisson', prixFcfa: 500, prixConfirmeLe: ilYAJours(3) },
     ],
     statut: 'publie',
+    populaire: true,
     estDemo: true,
   },
   {
@@ -96,6 +97,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
       { id: 'demo-2-p4', nom: "Salade d'avocat", categorie: 'entree', prixFcfa: 3000, prixConfirmeLe: ilYAJours(5) },
     ],
     statut: 'publie',
+    populaire: true,
     estDemo: true,
   },
   {
@@ -127,6 +129,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
       { id: 'demo-3-p3', nom: 'Café Touba', categorie: 'boisson', prixFcfa: null, prixConfirmeLe: null },
     ],
     statut: 'publie',
+    populaire: false,
     estDemo: true,
   },
   {
@@ -164,6 +167,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
       { id: 'demo-4-p4', nom: 'Milkshake au bissap', categorie: 'boisson', prixFcfa: null, prixConfirmeLe: null },
     ],
     statut: 'publie',
+    populaire: true,
     estDemo: true,
   },
   {
@@ -199,6 +203,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
       { id: 'demo-5-p5', nom: 'Thiakry', categorie: 'dessert', prixFcfa: null, prixConfirmeLe: null },
     ],
     statut: 'publie',
+    populaire: false,
     estDemo: true,
   },
 ]

@@ -62,6 +62,8 @@ export interface Restaurant {
   horairesConfirmesLe: string | null
   plats: Plat[]
   statut: 'publie' | 'brouillon'
+  /** Mis en avant dans la rubrique « Populaires » de l'accueil. */
+  populaire: boolean
   /** Vrai pour les fiches fictives de démonstration. */
   estDemo: boolean
 }

@@ -204,8 +204,74 @@ main {
 
 .filtres-ligne {
   display: grid;
-  grid-template-columns: 1fr 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 10px;
+}
+
+/* ---------- Catégories illustrées ---------- */
+
+.categories {
+  list-style: none;
+  margin: 0 -16px;
+  padding: 4px 16px 2px;
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.categories::-webkit-scrollbar {
+  display: none;
+}
+
+.categorie {
+  border: none;
+  background: none;
+  padding: 4px 6px;
+  display: grid;
+  justify-items: center;
+  gap: 6px;
+  cursor: pointer;
+  min-width: 66px;
+}
+
+.categorie-icone {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  box-shadow: var(--ombre);
+  display: grid;
+  place-items: center;
+  color: var(--vert-fonce);
+  transition:
+    background-color 0.2s var(--sortie-douce),
+    border-color 0.2s var(--sortie-douce),
+    color 0.2s var(--sortie-douce),
+    transform 0.15s var(--sortie-douce);
+}
+
+.categorie:active .categorie-icone {
+  transform: scale(0.92);
+}
+
+.categorie-active .categorie-icone {
+  background: var(--vert);
+  border-color: var(--vert);
+  color: #ffffff;
+}
+
+.categorie-nom {
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--encre-douce);
+  white-space: nowrap;
+}
+
+.categorie-active .categorie-nom {
+  color: var(--vert-fonce);
 }
 
 .select-etiquette {
@@ -358,6 +424,40 @@ main {
   padding: 0;
   display: grid;
   gap: 18px;
+}
+
+/* ---------- Rubriques (accueil en mode parcours) ---------- */
+
+.rubrique {
+  margin-top: 24px;
+}
+
+.rubrique h2 {
+  font-size: 1.15rem;
+  font-weight: 750;
+  margin-bottom: 12px;
+}
+
+.rangee-cartes {
+  list-style: none;
+  margin: 0 -16px;
+  padding: 4px 16px 14px;
+  display: flex;
+  gap: 14px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.rangee-cartes::-webkit-scrollbar {
+  display: none;
+}
+
+.rangee-cartes .carte {
+  width: min(76vw, 300px);
+  flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 .carte {
@@ -984,7 +1084,7 @@ main {
 
 @media (min-width: 680px) {
   .filtres-ligne {
-    grid-template-columns: repeat(2, minmax(0, 260px)) auto;
+    grid-template-columns: minmax(0, 280px) auto;
   }
 
   .grille-cartes {

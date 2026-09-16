@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Criteres } from '../lib/filtres'
 import { TRANCHES_BUDGET } from '../lib/filtres'
+import { BarreCategories } from './BarreCategories'
 
 interface Props {
   criteres: Criteres
@@ -41,6 +42,12 @@ export function FiltresBar({ criteres, quartiers, cuisines, onChange }: Props) {
         />
       </div>
 
+      <BarreCategories
+        cuisines={cuisines}
+        selection={criteres.cuisine}
+        onSelect={(cuisine) => onChange({ ...criteres, cuisine })}
+      />
+
       <div className="filtres-ligne">
         <select
           aria-label="Quartier"
@@ -51,18 +58,6 @@ export function FiltresBar({ criteres, quartiers, cuisines, onChange }: Props) {
           {quartiers.map((q) => (
             <option key={q} value={q}>
               {q}
-            </option>
-          ))}
-        </select>
-        <select
-          aria-label="Cuisine"
-          value={criteres.cuisine ?? ''}
-          onChange={(e) => onChange({ ...criteres, cuisine: e.target.value || null })}
-        >
-          <option value="">Cuisine</option>
-          {cuisines.map((c) => (
-            <option key={c} value={c}>
-              {c}
             </option>
           ))}
         </select>

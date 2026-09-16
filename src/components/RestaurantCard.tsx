@@ -23,12 +23,18 @@ export function RestaurantCard({ restaurant, maintenant, index }: Props) {
 
   return (
     <li className="carte" style={{ '--index': Math.min(index, 8) } as React.CSSProperties}>
-      <Link to={`/restaurant/${restaurant.slug}`} className="carte-lien" viewTransition>
-        <div
-          className="carte-photo"
-          // La photo « se morphe » vers la galerie de la fiche (View Transitions).
-          style={{ viewTransitionName: `photo-${restaurant.slug}` } as React.CSSProperties}
-        >
+      <Link
+        to={`/restaurant/${restaurant.slug}`}
+        className="carte-lien"
+        viewTransition
+        // Le nom de transition est posé au clic : un restaurant peut figurer
+        // dans plusieurs rubriques, et un nom dupliqué annulerait l'effet.
+        onClick={(e) => {
+          const photo = e.currentTarget.querySelector<HTMLElement>('.carte-photo')
+          if (photo) photo.style.viewTransitionName = `photo-${restaurant.slug}`
+        }}
+      >
+        <div className="carte-photo">
           <PhotoRestaurant photo={restaurant.photos[0] ?? null} className="carte-image" />
           {restaurant.estDemo && <BadgeDemo />}
         </div>

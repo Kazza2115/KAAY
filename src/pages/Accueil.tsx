@@ -24,6 +24,24 @@ import { EtatVide } from '../components/EtatVide'
 let cacheRestaurants: Restaurant[] | null = null
 
 /**
+ * Rubriques de l'accueil, façon Uber Eats. Un restaurant peut apparaître
+ * dans plusieurs rubriques ; une rubrique vide n'est pas affichée.
+ */
+const RUBRIQUES: { titre: string; correspond: (r: Restaurant) => boolean }[] = [
+  { titre: 'Populaires', correspond: (r) => r.populaire },
+  { titre: 'Fast food', correspond: (r) => r.cuisines.includes('Hamburger') },
+  {
+    titre: 'Poisson & fruits de mer',
+    correspond: (r) => r.cuisines.includes('Poisson') || r.cuisines.includes('Fruits de mer'),
+  },
+  {
+    titre: 'Viande & poulet',
+    correspond: (r) => r.cuisines.includes('Viande') || r.cuisines.includes('Poulet'),
+  },
+  { titre: 'Végétarien', correspond: (r) => r.cuisines.includes('Végétarien') },
+]
+
+/**
  * Accueil : recherche, filtres et liste des résultats.
  * Les critères vivent dans l'URL pour survivre au retour depuis une fiche.
  * Le texte de recherche est doublé dans un état local : React Router met à
@@ -112,6 +130,14 @@ export function Accueil() {
     [restaurants, criteres, tri],
   )
 
+  // Sans recherche ni filtre, l'accueil se parcourt par rubriques.
+  const enParcours =
+    criteres.recherche === '' &&
+    criteres.quartier === null &&
+    criteres.cuisine === null &&
+    criteres.budget === null &&
+    !criteres.aEmporter
+
   return (
     <div className="page">
       <h1 className="sr-only">Kaay — où manger à Dakar</h1>
@@ -144,6 +170,28 @@ export function Accueil() {
             </li>
           ))}
         </ul>
+      ) : enParcours ? (
+        RUBRIQUES.map((rubrique) => {
+          const liste = restaurants.filter(
+            (r) => r.statut === 'publie' && rubrique.correspond(r),
+          )
+          if (liste.length === 0) return null
+          return (
+            <section key={rubrique.titre} className="rubrique" aria-label={rubrique.titre}>
+              <h2>{rubrique.titre}</h2>
+              <ul className="rangee-cartes">
+                {liste.map((r, index) => (
+                  <RestaurantCard
+                    key={r.id}
+                    restaurant={r}
+                    maintenant={maintenant}
+                    index={index}
+                  />
+                ))}
+              </ul>
+            </section>
+          )
+        })
       ) : resultats.length === 0 ? (
         <EtatVide onEffacerFiltres={() => majCriteres(CRITERES_VIDES)} />
       ) : (
