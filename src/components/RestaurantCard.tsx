@@ -12,17 +12,23 @@ interface Props {
   restaurant: Restaurant
   /** Instant de référence pour l'état ouvert/fermé (rafraîchi par l'appelant). */
   maintenant: Date
+  /** Position dans la liste, pour l'apparition en cascade. */
+  index: number
 }
 
 /** Carte de résultat : photo, nom, quartier, cuisine et prix d'un plat. */
-export function RestaurantCard({ restaurant, maintenant }: Props) {
+export function RestaurantCard({ restaurant, maintenant, index }: Props) {
   const plat = platRepresentatif(restaurant)
   const prixFiable = plat !== null && estRecente(plat.prixConfirmeLe)
 
   return (
-    <li className="carte">
-      <Link to={`/restaurant/${restaurant.slug}`} className="carte-lien">
-        <div className="carte-photo">
+    <li className="carte" style={{ '--index': Math.min(index, 8) } as React.CSSProperties}>
+      <Link to={`/restaurant/${restaurant.slug}`} className="carte-lien" viewTransition>
+        <div
+          className="carte-photo"
+          // La photo « se morphe » vers la galerie de la fiche (View Transitions).
+          style={{ viewTransitionName: `photo-${restaurant.slug}` } as React.CSSProperties}
+        >
           <PhotoRestaurant photo={restaurant.photos[0] ?? null} className="carte-image" />
           {restaurant.estDemo && <BadgeDemo />}
         </div>

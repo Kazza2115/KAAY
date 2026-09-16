@@ -71,7 +71,7 @@ export function FicheRestaurant() {
     // Revenir aux résultats si on vient de l'accueil, sinon y aller.
     const etat = window.history.state as { idx?: number } | null
     if (etat && typeof etat.idx === 'number' && etat.idx > 0) navigate(-1)
-    else navigate('/')
+    else navigate('/', { viewTransition: true })
   }
 
   const plats = [...restaurant.plats].sort(
@@ -103,10 +103,26 @@ export function FicheRestaurant() {
           : {})}
       >
         {restaurant.photos.length === 0 ? (
-          <PhotoRestaurant photo={null} className="galerie-photo" />
+          <div
+            className="galerie-cadre"
+            style={{ viewTransitionName: `photo-${restaurant.slug}` } as React.CSSProperties}
+          >
+            <PhotoRestaurant photo={null} className="galerie-photo" />
+          </div>
         ) : (
-          restaurant.photos.map((photo) => (
-            <PhotoRestaurant key={photo.src} photo={photo} className="galerie-photo" />
+          restaurant.photos.map((photo, index) => (
+            <div
+              key={photo.src}
+              className="galerie-cadre"
+              // La première photo répond à celle de la carte (View Transitions).
+              style={
+                index === 0
+                  ? ({ viewTransitionName: `photo-${restaurant.slug}` } as React.CSSProperties)
+                  : undefined
+              }
+            >
+              <PhotoRestaurant photo={photo} className="galerie-photo" />
+            </div>
           ))
         )}
       </div>

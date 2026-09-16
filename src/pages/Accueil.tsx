@@ -133,7 +133,17 @@ export function Accueil() {
       </p>
 
       {restaurants === null ? (
-        <p className="chargement">Chargement…</p>
+        <ul className="grille-cartes" aria-hidden="true">
+          {[0, 1, 2].map((i) => (
+            <li key={i} className="carte carte-squelette" style={{ '--index': i } as React.CSSProperties}>
+              <div className="squelette squelette-photo" />
+              <div className="carte-corps">
+                <div className="squelette squelette-ligne" style={{ width: '55%' }} />
+                <div className="squelette squelette-ligne" style={{ width: '75%' }} />
+              </div>
+            </li>
+          ))}
+        </ul>
       ) : resultats.length === 0 ? (
         <EtatVide onEffacerFiltres={() => majCriteres(CRITERES_VIDES)} />
       ) : (
@@ -154,8 +164,8 @@ export function Accueil() {
             </label>
           </div>
           <ul className="grille-cartes">
-            {resultats.map((r) => (
-              <RestaurantCard key={r.id} restaurant={r} maintenant={maintenant} />
+            {resultats.map((r, index) => (
+              <RestaurantCard key={r.id} restaurant={r} maintenant={maintenant} index={index} />
             ))}
           </ul>
         </section>
