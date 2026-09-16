@@ -1,6 +1,9 @@
 # Publie le build Vite sur GitHub Pages (gratuit pour les dépôts publics).
-# L'étape configure-pages active Pages toute seule au premier passage ;
-# à défaut : Settings → Pages → Source : « GitHub Actions ».
+#
+# Activation (une seule fois, à la main) : Settings → Pages → Source :
+# « GitHub Actions ». Le jeton du workflow ne peut pas créer le site Pages
+# lui-même ; tant que ce n'est pas fait, ce workflow échoue à l'étape
+# configure-pages. Ensuite, chaque poussée déploie automatiquement.
 name: Déployer sur GitHub Pages
 
 on:
