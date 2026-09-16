@@ -40,16 +40,12 @@ export function ModaleSimulation({ contenu, onFermer }: Props) {
     >
       {contenu && (
         <div className="modale-corps">
-          <p className="modale-etiquette">Action simulée</p>
+          <p className="modale-etiquette">Démo — action simulée</p>
           <h2 id="modale-titre">{contenu.titre}</h2>
-          <p>
-            Ce restaurant est une fiche fictive de démonstration : l'action n'est pas
-            réellement déclenchée.
-          </p>
           <p>{contenu.explication}</p>
           {contenu.cible && <code className="modale-cible">{contenu.cible}</code>}
           <button type="button" className="bouton bouton-principal" onClick={onFermer} autoFocus>
-            Compris
+            OK
           </button>
         </div>
       )}

@@ -114,13 +114,7 @@ export function Accueil() {
 
   return (
     <div className="page">
-      <section className="accroche">
-        <h1>Trouvez où manger à Dakar</h1>
-        <p>
-          Par quartier, par envie et par budget — puis contactez directement le
-          restaurant.
-        </p>
-      </section>
+      <h1 className="sr-only">Kaay — où manger à Dakar</h1>
 
       <FiltresBar
         criteres={criteres}
@@ -139,7 +133,7 @@ export function Accueil() {
       </p>
 
       {restaurants === null ? (
-        <p className="chargement">Chargement des restaurants…</p>
+        <p className="chargement">Chargement…</p>
       ) : resultats.length === 0 ? (
         <EtatVide onEffacerFiltres={() => majCriteres(CRITERES_VIDES)} />
       ) : (
@@ -149,8 +143,11 @@ export function Accueil() {
               {resultats.length} restaurant{resultats.length > 1 ? 's' : ''}
             </h2>
             <label className="tri">
-              <span>Trier</span>
-              <select value={tri} onChange={(e) => majTri(e.target.value as Tri)}>
+              <select
+                aria-label="Trier les résultats"
+                value={tri}
+                onChange={(e) => majTri(e.target.value as Tri)}
+              >
                 <option value="pertinence">Pertinence</option>
                 <option value="alphabetique">Nom A–Z</option>
               </select>

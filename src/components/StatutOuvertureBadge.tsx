@@ -12,15 +12,16 @@ interface Props {
  */
 export function StatutOuvertureBadge({ statut, detaille = false }: Props) {
   if (statut.type === 'ouvert') {
-    // En version compacte, garder la nuance « selon les horaires » pour
-    // les lecteurs d'écran et l'infobulle : l'ouverture reste déclarative.
+    // La nuance « selon les horaires confirmés » reste portée par
+    // l'infobulle et les lecteurs d'écran : l'ouverture est déclarative.
     return (
       <span
         className="statut statut-ouvert"
-        {...(detaille ? {} : { title: 'Ouvert selon les horaires confirmés', 'aria-label': 'Ouvert selon les horaires confirmés' })}
+        title="Ouvert selon les horaires confirmés"
+        aria-label={`Ouvert selon les horaires confirmés${detaille ? `, jusqu'à ${statut.fermeA}` : ''}`}
       >
         <span className="statut-point" aria-hidden="true" />
-        {detaille ? `Ouvert selon les horaires · jusqu'à ${statut.fermeA}` : 'Ouvert'}
+        {detaille ? `Ouvert · jusqu'à ${statut.fermeA}` : 'Ouvert'}
       </span>
     )
   }

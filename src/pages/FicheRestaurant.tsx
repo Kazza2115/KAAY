@@ -61,7 +61,7 @@ export function FicheRestaurant() {
     return (
       <div className="page">
         <p className="chargement" role="status">
-          Chargement de la fiche…
+          Chargement…
         </p>
       </div>
     )
@@ -154,10 +154,7 @@ export function FicheRestaurant() {
             </li>
           ))}
         </ul>
-        <p className="note-discrete">
-          Prix en FCFA, relevés sur place. La disponibilité des plats se confirme au
-          moment du contact.
-        </p>
+        <p className="note-discrete">Prix en FCFA — disponibilité à confirmer au contact.</p>
       </section>
 
       <section className="fiche-section" aria-labelledby="titre-horaires">
@@ -193,10 +190,7 @@ export function FicheRestaurant() {
             )}
           </>
         ) : (
-          <p className="info-manquante">
-            Horaires à confirmer directement auprès du restaurant
-            {restaurant.telephone ? ` au ${formatTelephone(restaurant.telephone)}` : ''}.
-          </p>
+          <p className="info-manquante">À confirmer auprès du restaurant.</p>
         )}
       </section>
 
@@ -208,10 +202,7 @@ export function FicheRestaurant() {
           <p className="info-manquante">Adresse à confirmer.</p>
         )}
         {restaurant.latitude === null && (
-          <p className="note-discrete">
-            Localisation en cours de vérification par l'équipe — l'itinéraire sera
-            disponible ensuite.
-          </p>
+          <p className="note-discrete">Localisation à confirmer.</p>
         )}
         {restaurant.telephone && (
           <p className="note-discrete">Téléphone : {formatTelephone(restaurant.telephone)}</p>
@@ -222,8 +213,7 @@ export function FicheRestaurant() {
         <LienSignalement restaurant={restaurant} />
         {restaurant.horairesConfirmesLe && horairesRecents && (
           <p className="note-discrete">
-            Horaires confirmés {formatDepuis(restaurant.horairesConfirmesLe)} par l'équipe
-            Kaay.
+            Horaires vérifiés {formatDepuis(restaurant.horairesConfirmesLe)}.
           </p>
         )}
       </div>

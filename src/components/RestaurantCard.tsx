@@ -45,9 +45,7 @@ export function RestaurantCard({ restaurant, maintenant }: Props) {
           )}
           {plat && plat.prixFcfa !== null && (
             <p className={`carte-fraicheur ${prixFiable ? '' : 'carte-fraicheur-perimee'}`}>
-              {prixFiable
-                ? `Prix vérifié ${formatDepuis(plat.prixConfirmeLe) ?? ''}`
-                : 'Prix à reconfirmer'}
+              {prixFiable ? `Vérifié ${formatDepuis(plat.prixConfirmeLe) ?? ''}` : 'À reconfirmer'}
             </p>
           )}
         </div>

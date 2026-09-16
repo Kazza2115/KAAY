@@ -28,9 +28,9 @@ export function LienSignalement({ restaurant }: Props) {
           if (restaurant.estDemo) {
             e.preventDefault()
             setSimulation({
-              titre: 'Signaler une information à corriger',
+              titre: 'Signaler une erreur',
               explication:
-                "En production, WhatsApp s'ouvrirait avec un message adressé à l'équipe Kaay, référence de la fiche incluse. Chaque correction est vérifiée avant publication.",
+                "Fiche fictive : en production, WhatsApp s'ouvrirait avec un message adressé à l'équipe Kaay.",
               cible: lien,
             })
           } else {
@@ -38,7 +38,7 @@ export function LienSignalement({ restaurant }: Props) {
           }
         }}
       >
-        Une information est fausse ou dépassée ? Signalez-la à l'équipe.
+        Signaler une erreur
       </button>
       <ModaleSimulation contenu={simulation} onFermer={() => setSimulation(null)} />
     </>

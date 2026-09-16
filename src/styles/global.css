@@ -145,27 +145,10 @@ main {
   background: var(--rouge);
 }
 
-/* ---------- Accroche ---------- */
-
-.accroche {
-  padding: 24px 0 4px;
-}
-
-.accroche h1 {
-  font-size: 1.5rem;
-  font-weight: 750;
-}
-
-.accroche p {
-  margin: 6px 0 0;
-  color: var(--encre-douce);
-  max-width: 34rem;
-}
-
 /* ---------- Recherche et filtres ---------- */
 
 .filtres {
-  padding: 16px 0 8px;
+  padding: 20px 0 8px;
   display: grid;
   gap: 12px;
 }
@@ -207,15 +190,10 @@ main {
     var(--ombre);
 }
 
-.filtres-selects {
+.filtres-ligne {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1fr auto;
   gap: 10px;
-}
-
-.select-enveloppe {
-  display: grid;
-  gap: 4px;
 }
 
 .select-etiquette {
@@ -227,10 +205,13 @@ main {
   padding-left: 4px;
 }
 
-.select-enveloppe select,
+.filtres-ligne select,
 .tri select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 10px 32px 10px 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   font: inherit;
   color: var(--encre);
   background: var(--surface);
@@ -241,6 +222,48 @@ main {
   background-repeat: no-repeat;
   background-position: right 10px center;
   background-size: 18px;
+}
+
+.bouton-filtres {
+  position: relative;
+  width: 46px;
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon-petit);
+  background: var(--surface);
+  color: var(--encre-douce);
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.bouton-filtres-actif {
+  border-color: var(--vert);
+  color: var(--vert-fonce);
+}
+
+.filtres-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 4px;
+  border-radius: 999px;
+  background: var(--vert);
+  color: #ffffff;
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+}
+
+.panneau-filtres {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
 }
 
 .filtres-chips {
@@ -274,11 +297,6 @@ main {
   font-weight: 600;
   text-decoration: underline;
   text-underline-offset: 3px;
-}
-
-.groupe-budget {
-  display: grid;
-  gap: 6px;
 }
 
 .sr-only {
@@ -879,16 +897,8 @@ main {
 /* ---------- Écrans plus larges ---------- */
 
 @media (min-width: 680px) {
-  .accroche {
-    padding-top: 36px;
-  }
-
-  .accroche h1 {
-    font-size: 1.9rem;
-  }
-
-  .filtres-selects {
-    grid-template-columns: repeat(2, minmax(0, 260px));
+  .filtres-ligne {
+    grid-template-columns: repeat(2, minmax(0, 260px)) auto;
   }
 
   .grille-cartes {

@@ -5,10 +5,7 @@ export function PageIntrouvable() {
   return (
     <div className="page etat-vide">
       <h1>Fiche introuvable</h1>
-      <p>
-        Ce restaurant n'existe pas ou n'est plus publié. Le catalogue évolue au fil
-        des vérifications de l'équipe.
-      </p>
+      <p>Ce restaurant n'existe pas ou n'est plus publié.</p>
       <Link to="/" className="bouton bouton-principal">
         Voir les restaurants
       </Link>

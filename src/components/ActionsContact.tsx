@@ -47,9 +47,9 @@ export function ActionsContact({ restaurant }: Props) {
           href={lienWhatsApp}
           onClick={(e) =>
             auClic(e, {
-              titre: `Écrire à ${restaurant.nom} sur WhatsApp`,
+              titre: `Écrire à ${restaurant.nom}`,
               explication:
-                "En production, WhatsApp s'ouvrirait avec un message prêt à envoyer au restaurant.",
+                "Fiche fictive : rien n'est envoyé. En production, WhatsApp s'ouvrirait avec ce message :",
               cible: lienWhatsApp,
             })
           }
@@ -70,7 +70,7 @@ export function ActionsContact({ restaurant }: Props) {
           onClick={(e) =>
             auClic(e, {
               titre: `Appeler ${restaurant.nom}`,
-              explication: `En production, votre téléphone composerait le ${formatTelephone(
+              explication: `Fiche fictive : aucun appel. En production, votre téléphone composerait le ${formatTelephone(
                 restaurant.telephone ?? '',
               )}.`,
               cible: lienAppel,
@@ -96,7 +96,7 @@ export function ActionsContact({ restaurant }: Props) {
             auClic(e, {
               titre: `Itinéraire vers ${restaurant.nom}`,
               explication:
-                "En production, votre application de cartes s'ouvrirait avec le trajet vers le restaurant.",
+                "Fiche fictive : en production, votre application de cartes s'ouvrirait avec le trajet.",
               cible: lienItineraire,
             })
           }
@@ -120,11 +120,9 @@ export function ActionsContact({ restaurant }: Props) {
       {(!restaurant.whatsapp || !restaurant.telephone || lienItineraire === null) && (
         <p className="note-discrete actions-note">
           {[
-            !restaurant.whatsapp ? 'WhatsApp non renseigné pour cette fiche.' : null,
+            !restaurant.whatsapp ? 'WhatsApp non renseigné.' : null,
             !restaurant.telephone ? 'Téléphone non renseigné.' : null,
-            lienItineraire === null
-              ? 'Itinéraire indisponible : localisation en cours de vérification.'
-              : null,
+            lienItineraire === null ? 'Localisation à confirmer.' : null,
           ]
             .filter(Boolean)
             .join(' ')}

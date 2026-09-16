@@ -17,11 +17,10 @@ export default function App() {
       </main>
       <footer className="pied">
         <p>
-          <strong>Version de démonstration.</strong> Les cinq restaurants affichés sont
-          fictifs : ils servent à tester le parcours avant l'arrivée des fiches
-          vérifiées sur le terrain à Dakar.
+          <strong>Démo</strong> — restaurants fictifs, en attendant les fiches vérifiées
+          sur le terrain.
         </p>
-        <p className="pied-signature">Kaay — fait à Dakar.</p>
+        <p className="pied-signature">Kaay — fait à Dakar</p>
       </footer>
     </div>
   )

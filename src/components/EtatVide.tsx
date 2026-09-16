@@ -12,11 +12,8 @@ export function EtatVide({ onEffacerFiltres }: Props) {
         <circle cx="38" cy="42" r="4" fill="#C9C2B2" />
         <circle cx="58" cy="42" r="4" fill="#C9C2B2" />
       </svg>
-      <h2>Aucun restaurant ne correspond</h2>
-      <p>
-        Essayez un autre quartier, une autre cuisine ou un budget plus large. Le
-        catalogue s'agrandit au fil des vérifications sur le terrain.
-      </p>
+      <h2>Aucun restaurant</h2>
+      <p>Essayez d'élargir vos critères.</p>
       <button type="button" className="bouton bouton-principal" onClick={onEffacerFiltres}>
         Effacer les filtres
       </button>
