@@ -27,7 +27,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
     slug: 'chez-astou',
     nom: 'Chez Astou',
     quartier: 'Médina',
-    cuisines: ['Sénégalaise'],
+    cuisines: ['Poisson', 'Viande', 'Poulet'],
     description:
       'Cantine familiale tenue par Astou depuis quinze ans. Le thiéboudienne mijote au feu de bois chaque matin et part souvent avant 14 h.',
     adresse: 'Rue 11 x 22, Médina, Dakar',
@@ -64,7 +64,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
     slug: 'le-ngor-grill',
     nom: 'Le Ngor Grill',
     quartier: 'Ngor',
-    cuisines: ['Grillades', 'Fruits de mer'],
+    cuisines: ['Poisson', 'Fruits de mer'],
     description:
       'Terrasse face à la plage de Ngor. Le poisson du jour arrive des pirogues du matin et passe directement au gril.',
     adresse: 'Route de la plage de Ngor, Dakar',
@@ -103,7 +103,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
     slug: 'dibiterie-khadim',
     nom: 'Dibiterie Khadim',
     quartier: 'Grand Yoff',
-    cuisines: ['Dibiterie', 'Grillades'],
+    cuisines: ['Viande', 'Poulet'],
     description:
       'Dibiterie de quartier réputée pour son mouton grillé au kilo, servi sur papier kraft avec oignons et moutarde.',
     adresse: 'Arrêt Khar Yalla, Grand Yoff, Dakar',
@@ -131,12 +131,12 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
   },
   {
     id: 'demo-4',
-    slug: 'saveurs-du-cap',
-    nom: 'Saveurs du Cap',
+    slug: 'dakar-burger',
+    nom: 'Dakar Burger',
     quartier: 'Plateau',
-    cuisines: ['Cap-verdienne'],
+    cuisines: ['Hamburger', 'Poulet'],
     description:
-      'Petite salle discrète derrière le marché Kermel. Cachupa mijotée à la commande et poisson séché comme à Mindelo.',
+      'Comptoir de burgers derrière le marché Kermel : pain brioché cuit sur place, bœuf haché du jour et sauces maison.',
     adresse: '27 rue Victor Hugo, Plateau, Dakar',
     latitude: 14.6708,
     longitude: -17.4321,
@@ -158,9 +158,10 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
     ],
     horairesConfirmesLe: ilYAJours(6),
     plats: [
-      { id: 'demo-4-p1', nom: 'Cachupa refogada', categorie: 'plat', prixFcfa: 4000, prixConfirmeLe: ilYAJours(6) },
-      { id: 'demo-4-p2', nom: 'Poisson séché, riz coco', categorie: 'plat', prixFcfa: 4500, prixConfirmeLe: ilYAJours(6) },
-      { id: 'demo-4-p3', nom: 'Pastel de thon (3 pièces)', categorie: 'entree', prixFcfa: 1500, prixConfirmeLe: ilYAJours(6) },
+      { id: 'demo-4-p1', nom: 'Cheeseburger double', categorie: 'plat', prixFcfa: 3500, prixConfirmeLe: ilYAJours(6) },
+      { id: 'demo-4-p2', nom: 'Burger poulet croustillant', categorie: 'plat', prixFcfa: 3000, prixConfirmeLe: ilYAJours(6) },
+      { id: 'demo-4-p3', nom: 'Frites maison', categorie: 'entree', prixFcfa: 1000, prixConfirmeLe: ilYAJours(6) },
+      { id: 'demo-4-p4', nom: 'Milkshake au bissap', categorie: 'boisson', prixFcfa: null, prixConfirmeLe: null },
     ],
     statut: 'publie',
     estDemo: true,
@@ -170,7 +171,7 @@ export const RESTAURANTS_DEMO: Restaurant[] = [
     slug: 'teranga-vege',
     nom: 'Teranga Végé',
     quartier: 'Point E',
-    cuisines: ['Végétarienne', 'Sénégalaise'],
+    cuisines: ['Végétarien'],
     description:
       'Cuisine végétarienne à base de produits locaux : fonio, niébé, légumes du marché de Tilène et jus maison.',
     adresse: 'Rue de Kaolack, Point E, Dakar',

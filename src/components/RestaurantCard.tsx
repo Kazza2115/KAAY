@@ -38,7 +38,8 @@ export function RestaurantCard({ restaurant, maintenant, index }: Props) {
             <StatutOuvertureBadge statut={statutOuverture(restaurant, maintenant)} />
           </div>
           <p className="carte-sous-titre">
-            {restaurant.quartier} · {restaurant.cuisines.join(', ')}
+            {/* Deux types au plus sur la carte ; la fiche liste tout. */}
+            {restaurant.quartier} · {restaurant.cuisines.slice(0, 2).join(', ')}
             {restaurant.aEmporter && <span className="carte-emporter"> · À emporter</span>}
           </p>
           {plat && plat.prixFcfa !== null ? (
