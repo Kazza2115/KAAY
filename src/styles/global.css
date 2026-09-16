@@ -104,28 +104,18 @@ main {
   margin: 0 auto;
   padding: 14px 16px 12px;
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
 }
 
 .marque {
-  text-decoration: none;
-  color: var(--vert);
   display: inline-flex;
-  align-items: baseline;
-  gap: 2px;
+  align-items: center;
 }
 
-.marque-nom {
-  font-size: 1.65rem;
-  font-weight: 800;
-  letter-spacing: -0.03em;
-}
-
-.marque-etoile {
-  color: var(--jaune-bord);
-  font-size: 0.9rem;
-  transform: translateY(-0.7em);
+.marque-logo {
+  height: 34px;
+  width: auto;
 }
 
 .marque-slogan {

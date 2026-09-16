@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="30 10 1050 450" role="img" aria-label="Kaay">
+  <!-- Logo Kaay : « kaay » en vert, les deux « a » portent une épingle de
+       carte (point jaune, point rouge) — couleurs du Sénégal. -->
+  <g fill="none" stroke="#00853F" stroke-width="78" stroke-linecap="round">
+    <!-- k -->
+    <path d="M78 58 V292"/>
+    <path d="M212 128 L88 224"/>
+    <path d="M104 214 L216 292"/>
+    <!-- queues des deux a -->
+    <path d="M495 226 V292"/>
+    <path d="M790 226 V292"/>
+    <!-- y : panse en u -->
+    <path d="M872 130 v78 a76 76 0 0 0 152 0 v-78"/>
+    <!-- y : hampe descendante avec crochet -->
+    <path d="M1024 130 V362 a62 62 0 0 1 -120 23"/>
+  </g>
+  <!-- a 1 -->
+  <circle cx="375" cy="211" r="120" fill="#00853F"/>
+  <path d="M375 302 C 337 254 317 215 317 186 a58 58 0 1 1 116 0 c0 29 -20 68 -58 116 z" fill="#FFFFFF"/>
+  <circle cx="375" cy="186" r="28" fill="#F5B301"/>
+  <!-- a 2 -->
+  <circle cx="670" cy="211" r="120" fill="#00853F"/>
+  <path d="M670 302 C 632 254 612 215 612 186 a58 58 0 1 1 116 0 c0 29 -20 68 -58 116 z" fill="#FFFFFF"/>
+  <circle cx="670" cy="186" r="28" fill="#E31B23"/>
+</svg>
