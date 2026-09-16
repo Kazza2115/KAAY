@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import logoKaay from '../assets/logo-kaay.svg'
 
-/** En-tête commun : logo officiel Kaay et liseré aux couleurs du Sénégal. */
+/** En-tête commun : logo officiel Kaay centré, slogan discret. */
 export function Header() {
   return (
     <header className="entete">
@@ -10,11 +10,6 @@ export function Header() {
           <img src={logoKaay} alt="Kaay" className="marque-logo" />
         </Link>
         <p className="marque-slogan">Où manger à Dakar</p>
-      </div>
-      <div className="lisere-senegal" aria-hidden="true">
-        <span className="lisere-vert" />
-        <span className="lisere-jaune" />
-        <span className="lisere-rouge" />
       </div>
     </header>
   )
