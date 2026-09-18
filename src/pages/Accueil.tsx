@@ -54,7 +54,8 @@ export function Accueil() {
   const [parametres, setParametres] = useSearchParams()
   const [texteRecherche, setTexteRecherche] = useState(() => parametres.get('q') ?? '')
   const maintenant = useMaintenant()
-  const { etat: etatPosition, position, demander: demanderPosition } = usePosition()
+  // Position demandée automatiquement à l'arrivée, pour les distances en km.
+  const { etat: etatPosition, position, demander: demanderPosition } = usePosition(true)
 
   useEffect(() => {
     let actif = true

@@ -1,16 +1,17 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { PointGeo } from './distance'
 
 /**
- * Position de la personne, demandée seulement quand elle le décide
- * (bouton épingle). Conservée au niveau du module pour survivre aux
- * navigations sans redemander la permission.
+ * Position de la personne. Demandée automatiquement à la première visite
+ * (`auto`), puis relançable par le bouton épingle. Conservée au niveau du
+ * module pour survivre aux navigations sans redemander la permission.
  */
 let cachePosition: PointGeo | null = null
+let demandeAutoFaite = false
 
 export type EtatPosition = 'inconnue' | 'recherche' | 'ok' | 'refusee'
 
-export function usePosition() {
+export function usePosition(auto = false) {
   const [etat, setEtat] = useState<EtatPosition>(cachePosition ? 'ok' : 'inconnue')
   const [position, setPosition] = useState<PointGeo | null>(cachePosition)
 
@@ -30,6 +31,16 @@ export function usePosition() {
       { enableHighAccuracy: false, timeout: 10_000, maximumAge: 300_000 },
     )
   }
+
+  // Une seule demande automatique par session : ensuite, c'est le bouton.
+  useEffect(() => {
+    if (auto && !demandeAutoFaite && cachePosition === null) {
+      demandeAutoFaite = true
+      demander()
+    }
+    // `demander` est stable au sein du montage.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [auto])
 
   return { etat, position, demander }
 }
