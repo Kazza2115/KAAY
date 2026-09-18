@@ -1099,8 +1099,17 @@ main {
 /* ---------- Écrans plus larges ---------- */
 
 @media (min-width: 680px) {
-  .filtres-ligne {
-    grid-template-columns: minmax(0, 280px) auto auto;
+  /* La zone de recherche se centre sous le logo sur les grands écrans. */
+  .filtres {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .categories {
+    justify-content: center;
+    margin: 0;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .grille-cartes {
