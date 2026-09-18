@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import type { Criteres } from '../lib/filtres'
 import { TRANCHES_BUDGET } from '../lib/filtres'
+import type { EtatPosition } from '../lib/usePosition'
 import { BarreCategories } from './BarreCategories'
 
 interface Props {
@@ -8,13 +9,23 @@ interface Props {
   quartiers: string[]
   cuisines: string[]
   onChange: (criteres: Criteres) => void
+  /** État de la géolocalisation, pour afficher les distances. */
+  etatPosition: EtatPosition
+  onDemanderPosition: () => void
 }
 
 /**
  * Recherche et filtres. Au premier plan : recherche, quartier, cuisine.
  * Le budget et « à emporter » se replient derrière le bouton réglages.
  */
-export function FiltresBar({ criteres, quartiers, cuisines, onChange }: Props) {
+export function FiltresBar({
+  criteres,
+  quartiers,
+  cuisines,
+  onChange,
+  etatPosition,
+  onDemanderPosition,
+}: Props) {
   const nbFiltresReplies = (criteres.budget ? 1 : 0) + (criteres.aEmporter ? 1 : 0)
   // Ouvert d'emblée si l'URL contient déjà un filtre replié.
   const [panneauOuvert, setPanneauOuvert] = useState(nbFiltresReplies > 0)
@@ -61,6 +72,27 @@ export function FiltresBar({ criteres, quartiers, cuisines, onChange }: Props) {
             </option>
           ))}
         </select>
+        <button
+          type="button"
+          className={`bouton-filtres ${etatPosition === 'ok' ? 'bouton-filtres-actif' : ''}`}
+          aria-label="Afficher les distances autour de moi"
+          title={
+            etatPosition === 'refusee'
+              ? 'Position refusée ou indisponible'
+              : 'Afficher les distances autour de moi'
+          }
+          disabled={etatPosition === 'recherche'}
+          onClick={onDemanderPosition}
+        >
+          {etatPosition === 'recherche' ? (
+            <span className="position-attente" aria-hidden="true" />
+          ) : (
+            <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 21c3.5-3.2 6.5-7.2 6.5-11a6.5 6.5 0 1 0-13 0c0 3.8 3 7.8 6.5 11z" />
+              <circle cx="12" cy="10" r="2.6" />
+            </svg>
+          )}
+        </button>
         <button
           type="button"
           className={`bouton-filtres ${panneauOuvert || nbFiltresReplies > 0 ? 'bouton-filtres-actif' : ''}`}

@@ -8,10 +8,12 @@ import {
   type Tri,
   TRANCHES_BUDGET,
   cuisinesDisponibles,
+  distanceVers,
   filtrerRestaurants,
   quartiersDisponibles,
 } from '../lib/filtres'
 import { useMaintenant } from '../lib/useMaintenant'
+import { usePosition } from '../lib/usePosition'
 import { FiltresBar } from '../components/FiltresBar'
 import { RestaurantCard } from '../components/RestaurantCard'
 import { EtatVide } from '../components/EtatVide'
@@ -52,6 +54,7 @@ export function Accueil() {
   const [parametres, setParametres] = useSearchParams()
   const [texteRecherche, setTexteRecherche] = useState(() => parametres.get('q') ?? '')
   const maintenant = useMaintenant()
+  const { etat: etatPosition, position, demander: demanderPosition } = usePosition()
 
   useEffect(() => {
     let actif = true
@@ -91,7 +94,13 @@ export function Accueil() {
     }),
     [parametres, texteRecherche],
   )
-  const tri: Tri = parametres.get('tri') === 'alphabetique' ? 'alphabetique' : 'pertinence'
+  const parametreTri = parametres.get('tri')
+  const tri: Tri =
+    parametreTri === 'alphabetique'
+      ? 'alphabetique'
+      : parametreTri === 'distance' && position
+        ? 'distance'
+        : 'pertinence'
 
   function majCriteres(suivants: Criteres) {
     if (suivants.recherche !== texteRecherche) setTexteRecherche(suivants.recherche)
@@ -117,8 +126,8 @@ export function Accueil() {
     setParametres(
       (precedents) => {
         const p = new URLSearchParams(precedents)
-        if (suivant === 'alphabetique') p.set('tri', suivant)
-        else p.delete('tri')
+        if (suivant === 'pertinence') p.delete('tri')
+        else p.set('tri', suivant)
         return p
       },
       { replace: true },
@@ -126,9 +135,12 @@ export function Accueil() {
   }
 
   const resultats = useMemo(
-    () => (restaurants ? filtrerRestaurants(restaurants, criteres, tri) : []),
-    [restaurants, criteres, tri],
+    () => (restaurants ? filtrerRestaurants(restaurants, criteres, tri, position) : []),
+    [restaurants, criteres, tri, position],
   )
+
+  /** Distance à afficher sur une carte (undefined tant que pas de position). */
+  const distancePour = (r: Restaurant) => (position ? distanceVers(r, position) : undefined)
 
   // Sans recherche ni filtre, l'accueil se parcourt par rubriques.
   const enParcours =
@@ -147,6 +159,8 @@ export function Accueil() {
         quartiers={restaurants ? quartiersDisponibles(restaurants) : []}
         cuisines={restaurants ? cuisinesDisponibles(restaurants) : []}
         onChange={majCriteres}
+        etatPosition={etatPosition}
+        onDemanderPosition={demanderPosition}
       />
 
       {/* Région live permanente : annonce le décompte aux lecteurs d'écran. */}
@@ -186,6 +200,7 @@ export function Accueil() {
                     restaurant={r}
                     maintenant={maintenant}
                     index={index}
+                    distance={distancePour(r)}
                   />
                 ))}
               </ul>
@@ -207,13 +222,20 @@ export function Accueil() {
                 onChange={(e) => majTri(e.target.value as Tri)}
               >
                 <option value="pertinence">Pertinence</option>
+                {position && <option value="distance">Distance</option>}
                 <option value="alphabetique">Nom A–Z</option>
               </select>
             </label>
           </div>
           <ul className="grille-cartes">
             {resultats.map((r, index) => (
-              <RestaurantCard key={r.id} restaurant={r} maintenant={maintenant} index={index} />
+              <RestaurantCard
+                key={r.id}
+                restaurant={r}
+                maintenant={maintenant}
+                index={index}
+                distance={distancePour(r)}
+              />
             ))}
           </ul>
         </section>

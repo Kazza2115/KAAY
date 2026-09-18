@@ -1,5 +1,6 @@
 import type { Plat, Restaurant, TrancheBudget } from '../types'
 import { estRecente } from './dates'
+import { type PointGeo, distanceKm } from './distance'
 import { normaliser } from './format'
 
 /** Recherche et filtres de l'accueil : quartier, cuisine, budget, à emporter. */
@@ -62,13 +63,24 @@ function scoreRecherche(restaurant: Restaurant, texte: string): number {
   return score
 }
 
-export type Tri = 'pertinence' | 'alphabetique'
+export type Tri = 'pertinence' | 'alphabetique' | 'distance'
 
-/** Applique recherche, filtres et tri. Ne retient que les fiches publiées. */
+/** Distance personne → restaurant, ou `null` si la fiche n'est pas localisée. */
+export function distanceVers(restaurant: Restaurant, position: PointGeo): number | null {
+  if (restaurant.latitude === null || restaurant.longitude === null) return null
+  return distanceKm(position, { lat: restaurant.latitude, lng: restaurant.longitude })
+}
+
+/**
+ * Applique recherche, filtres et tri. Ne retient que les fiches publiées.
+ * Le tri « distance » requiert `position` ; les fiches non localisées
+ * passent en fin de liste.
+ */
 export function filtrerRestaurants(
   restaurants: Restaurant[],
   criteres: Criteres,
   tri: Tri = 'pertinence',
+  position: PointGeo | null = null,
 ): Restaurant[] {
   const scores = new Map<string, number>()
   const retenus = restaurants.filter((r) => {
@@ -84,6 +96,16 @@ export function filtrerRestaurants(
   })
   const parNom = (a: Restaurant, b: Restaurant) => a.nom.localeCompare(b.nom, 'fr')
   if (tri === 'alphabetique') return retenus.sort(parNom)
+  if (tri === 'distance' && position) {
+    return retenus.sort((a, b) => {
+      const da = distanceVers(a, position)
+      const db = distanceVers(b, position)
+      if (da === null && db === null) return parNom(a, b)
+      if (da === null) return 1
+      if (db === null) return -1
+      return da - db
+    })
+  }
   return retenus.sort(
     (a, b) => (scores.get(b.id) ?? 0) - (scores.get(a.id) ?? 0) || parNom(a, b),
   )

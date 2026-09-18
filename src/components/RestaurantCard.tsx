@@ -1,8 +1,6 @@
 import { Link } from 'react-router-dom'
 import type { Restaurant } from '../types'
-import { estRecente, formatDepuis } from '../lib/dates'
-import { platRepresentatif } from '../lib/filtres'
-import { formatFcfa } from '../lib/format'
+import { formatDistance } from '../lib/distance'
 import { statutOuverture } from '../lib/horaires'
 import { BadgeDemo } from './BadgeDemo'
 import { PhotoRestaurant } from './PhotoRestaurant'
@@ -14,13 +12,15 @@ interface Props {
   maintenant: Date
   /** Position dans la liste, pour l'apparition en cascade. */
   index: number
+  /**
+   * Distance en km jusqu'au restaurant : `undefined` tant que la position
+   * de la personne est inconnue, `null` si la fiche n'est pas localisée.
+   */
+  distance?: number | null
 }
 
-/** Carte de résultat : photo, nom, quartier, cuisine et prix d'un plat. */
-export function RestaurantCard({ restaurant, maintenant, index }: Props) {
-  const plat = platRepresentatif(restaurant)
-  const prixFiable = plat !== null && estRecente(plat.prixConfirmeLe)
-
+/** Carte de résultat : photo, nom, quartier, cuisine et distance. */
+export function RestaurantCard({ restaurant, maintenant, index, distance }: Props) {
   return (
     <li className="carte" style={{ '--index': Math.min(index, 8) } as React.CSSProperties}>
       <Link
@@ -48,17 +48,12 @@ export function RestaurantCard({ restaurant, maintenant, index }: Props) {
             {restaurant.quartier} · {restaurant.cuisines.slice(0, 2).join(', ')}
             {restaurant.aEmporter && <span className="carte-emporter"> · À emporter</span>}
           </p>
-          {plat && plat.prixFcfa !== null ? (
-            <p className="carte-prix">
-              <span className="carte-plat">{plat.nom}</span>
-              <span className="carte-montant">{formatFcfa(plat.prixFcfa)}</span>
-            </p>
-          ) : (
-            <p className="carte-prix carte-prix-absent">Prix à confirmer</p>
-          )}
-          {plat && plat.prixFcfa !== null && (
-            <p className={`carte-fraicheur ${prixFiable ? '' : 'carte-fraicheur-perimee'}`}>
-              {prixFiable ? `Vérifié ${formatDepuis(plat.prixConfirmeLe) ?? ''}` : 'À reconfirmer'}
+          {distance !== undefined && (
+            <p className="carte-distance">
+              <svg viewBox="0 0 24 24" width="15" height="15" aria-hidden="true" fill="currentColor">
+                <path d="M12 2a7.5 7.5 0 0 0-7.5 7.5C4.5 14 8 18.5 12 22c4-3.5 7.5-8 7.5-12.5A7.5 7.5 0 0 0 12 2zm0 10.2a2.8 2.8 0 1 1 0-5.6 2.8 2.8 0 0 1 0 5.6z" />
+              </svg>
+              {distance === null ? 'Localisation à confirmer' : `à ${formatDistance(distance)}`}
             </p>
           )}
         </div>

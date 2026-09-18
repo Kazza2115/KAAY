@@ -203,7 +203,7 @@ main {
 
 .filtres-ligne {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr auto auto;
   gap: 10px;
 }
 
@@ -563,38 +563,34 @@ main {
   font-size: 0.9rem;
 }
 
-.carte-prix {
-  margin: 6px 0 0;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 12px;
-  border-top: 1px dashed var(--trait);
-  padding-top: 8px;
+.carte-distance {
+  margin: 4px 0 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.88rem;
+  font-weight: 650;
+  color: var(--vert-fonce);
 }
 
-.carte-plat {
-  font-size: 0.94rem;
+.carte-distance svg {
+  flex-shrink: 0;
 }
 
-.carte-montant {
-  font-weight: 750;
-  white-space: nowrap;
+/* Petit anneau d'attente pendant la recherche de position. */
+.position-attente {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid var(--trait);
+  border-top-color: var(--vert);
+  animation: rotation 0.9s linear infinite;
 }
 
-.carte-prix-absent {
-  color: var(--encre-douce);
-  font-size: 0.9rem;
-}
-
-.carte-fraicheur {
-  margin: 0;
-  font-size: 0.78rem;
-  color: var(--encre-douce);
-}
-
-.carte-fraicheur-perimee {
-  color: var(--rouge-encre);
+@keyframes rotation {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ---------- Pastilles d'état ---------- */
@@ -1104,7 +1100,7 @@ main {
 
 @media (min-width: 680px) {
   .filtres-ligne {
-    grid-template-columns: minmax(0, 280px) auto;
+    grid-template-columns: minmax(0, 280px) auto auto;
   }
 
   .grille-cartes {
