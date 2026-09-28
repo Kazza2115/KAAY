@@ -59,9 +59,9 @@ export function FicheRestaurant() {
 
   // Chaque fiche est une vraie page : titre d'onglet dédié, restauré au départ.
   useEffect(() => {
-    if (restaurant) document.title = `${restaurant.nom} — Kaay`
+    if (restaurant) document.title = `${restaurant.nom} · Kaay`
     return () => {
-      document.title = 'Kaay — Où manger à Dakar'
+      document.title = 'Kaay seet li ngay lekk !'
     }
   }, [restaurant])
 
@@ -104,7 +104,7 @@ export function FicheRestaurant() {
           </svg>
           Résultats
         </button>
-        <BoutonPartager titre={`${restaurant.nom} — Kaay`} />
+        <BoutonPartager titre={`${restaurant.nom} · Kaay`} />
       </div>
 
       <div

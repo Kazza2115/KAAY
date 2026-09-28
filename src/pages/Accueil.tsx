@@ -153,7 +153,7 @@ export function Accueil() {
 
   return (
     <div className="page">
-      <h1 className="sr-only">Kaay — où manger à Dakar</h1>
+      <h1 className="sr-only">Kaay seet li ngay lekk !</h1>
 
       <FiltresBar
         criteres={criteres}
