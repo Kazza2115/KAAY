@@ -9,7 +9,7 @@ export function Header() {
         <Link to="/" className="marque" aria-label="Kaay — retour à l'accueil">
           <img src={logoKaay} alt="Kaay" className="marque-logo" />
         </Link>
-        <p className="marque-slogan">Où manger à Dakar</p>
+        <p className="marque-slogan">Kaay seet li ngay lekk !</p>
       </div>
     </header>
   )

@@ -20,7 +20,7 @@ export default function App() {
           <strong>Démo</strong> — restaurants fictifs, en attendant les fiches vérifiées
           sur le terrain.
         </p>
-        <p className="pied-signature">Kaay — fait à Dakar</p>
+        <p className="pied-signature">Kaay seet li ngay lekk !</p>
       </footer>
     </div>
   )
