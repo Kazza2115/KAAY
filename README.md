@@ -64,21 +64,41 @@ src/
   assets/plats/         Illustrations de démonstration (remplaçables par photos)
 ```
 
-## Bascule vers Supabase
+## Bascule vers Supabase (déjà codée)
 
-Les composants ne lisent jamais les données de démonstration directement : ils
-passent par l'interface `FournisseurRestaurants` de `src/data/provider.ts`,
-asynchrone comme un appel réseau. Pour brancher Supabase :
+Les composants ne lisent jamais les données directement : ils passent par
+`FournisseurRestaurants` (`src/data/provider.ts`). Le fournisseur Supabase
+existe déjà (`src/data/supabaseProvider.ts`, API REST en `fetch`, aucune
+dépendance). Jour J :
 
-1. Créer les tables `restaurants`, `plats` et `horaires` sur le modèle des types
-   de `src/types.ts` (dates de confirmation comprises).
-2. Écrire un `supabaseProvider` qui implémente `listerRestaurants()` et
-   `trouverParSlug()` avec `supabase.from(...)`.
-3. L'exporter à la place de `demoProvider` dans `provider.ts`.
+1. Créer le projet Supabase (offre gratuite) et exécuter
+   `supabase/schema.sql` dans SQL Editor (tables + lecture publique des
+   seules fiches publiées).
+2. Saisir les fiches vérifiées (guide : `docs/collecte-fiches.md`).
+3. Définir `VITE_SUPABASE_URL` et `VITE_SUPABASE_ANON_KEY` — en local dans
+   `.env.local`, en déploiement dans le workflow `deploy-pages.yml` (étape
+   `npm run build`). Reconstruire : la bascule est automatique.
 
-Les images (`Photo.src`) deviendront des URL Supabase Storage sans changement
-de composant. Le fichier `public/_redirects` prépare l'hébergement statique
-(type Cloudflare Pages) pour les routes de l'application monopage.
+Les images (`Photo.src`) deviendront des URL Supabase Storage sans
+changement de composant.
+
+## Tests et intégration continue
+
+`npm run test:mobile` rejoue le parcours mobile complet (Chromium) contre
+le build : rubriques, distances, filtres, recherche, fiche, retours, états
+manquants. Le workflow `.github/workflows/ci.yml` exécute build + lint +
+parcours sur chaque poussée et pull request.
+
+## Divers
+
+- PWA : `public/manifest.webmanifest`, icônes `public/icones/`, service
+  worker léger `public/sw.js` (« Ajouter à l'écran d'accueil », hors-ligne
+  de secours).
+- Partage : balises Open Graph dans `index.html`, image `public/og.png`.
+- Réglages de lancement (numéro WhatsApp de l'équipe, URL publique) :
+  `src/config.ts`.
+- `public/_redirects` prépare un éventuel hébergement type Cloudflare
+  Pages ; sur GitHub Pages, `404.html` joue ce rôle.
 
 ## Publier sur GitHub Pages (gratuit)
 

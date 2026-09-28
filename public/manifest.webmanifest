@@ -1,0 +1,16 @@
+{
+  "name": "Kaay — Où manger à Dakar",
+  "short_name": "Kaay",
+  "description": "Trouvez où manger à Dakar selon votre quartier, vos envies et votre budget, puis contactez directement le restaurant.",
+  "lang": "fr",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#f4f6f7",
+  "theme_color": "#00853F",
+  "icons": [
+    { "src": "icones/icone-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icones/icone-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icones/icone-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

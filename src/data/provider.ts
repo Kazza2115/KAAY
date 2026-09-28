@@ -1,16 +1,18 @@
 import type { Restaurant } from '../types'
 import { RESTAURANTS_DEMO } from './demo/restaurants'
+import { creerSupabaseProvider } from './supabaseProvider'
 
 /**
  * Fournisseur de données.
  *
- * L'application ne lit jamais les données de démonstration directement :
- * elle passe par cette interface asynchrone, qui imite les appels réseau.
+ * L'application ne lit jamais les données directement : elle passe par
+ * cette interface asynchrone, qui imite les appels réseau.
  *
- * Bascule vers Supabase : créer un `supabaseProvider` qui implémente
- * `FournisseurRestaurants` avec `supabase.from('restaurants').select(...)`
- * (jointures plats + horaires), puis l'exporter ci-dessous à la place de
- * `demoProvider`. Aucun composant n'a besoin de changer.
+ * Par défaut, les 5 fiches fictives de démonstration. Dès que
+ * VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY sont définies au build
+ * (.env.local en local, variables du workflow de déploiement), les
+ * fiches vérifiées de Supabase prennent le relais — aucun composant
+ * à modifier (schéma : supabase/schema.sql).
  */
 export interface FournisseurRestaurants {
   listerRestaurants(): Promise<Restaurant[]>
@@ -26,4 +28,8 @@ const demoProvider: FournisseurRestaurants = {
   },
 }
 
-export const fournisseur: FournisseurRestaurants = demoProvider
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL as string | undefined
+const supabaseCle = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+
+export const fournisseur: FournisseurRestaurants =
+  supabaseUrl && supabaseCle ? creerSupabaseProvider(supabaseUrl, supabaseCle) : demoProvider

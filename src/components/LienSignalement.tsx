@@ -1,9 +1,7 @@
 import { useState } from 'react'
+import { CONFIG } from '../config'
 import type { Restaurant } from '../types'
 import { ModaleSimulation, type ContenuSimulation } from './ModaleSimulation'
-
-/** Numéro WhatsApp interne de l'équipe Kaay (à remplacer au lancement). */
-const WHATSAPP_EQUIPE = '221700000000'
 
 interface Props {
   restaurant: Restaurant
@@ -17,7 +15,7 @@ export function LienSignalement({ restaurant }: Props) {
   const [simulation, setSimulation] = useState<ContenuSimulation | null>(null)
 
   const message = `Correction pour la fiche « ${restaurant.nom} » (${restaurant.id}) : `
-  const lien = `https://wa.me/${WHATSAPP_EQUIPE}?text=${encodeURIComponent(message)}`
+  const lien = `https://wa.me/${CONFIG.whatsappEquipe}?text=${encodeURIComponent(message)}`
 
   return (
     <>

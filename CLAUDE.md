@@ -42,8 +42,17 @@ npm run preview    # sert le build (utilisé par les tests Playwright)
 
 ## Vérifications avant de pousser
 
-`npm run build` et `npm run lint` doivent passer. Un Chromium Playwright
-peut rejouer le parcours mobile (390 px) : recherche (y compris
-« boeuf » → « Mafé de bœuf »), filtres quartier/catégorie/budget,
-navigation vers une fiche, retour avec filtres conservés, états vides
-et informations manquantes (fiche « dibiterie-khadim »).
+`npm run build`, `npm run lint` puis `npm run test:mobile` (parcours
+mobile complet dans Chromium ; en local sans navigateur Playwright,
+définir CHROMIUM_PATH vers un Chromium existant). La CI
+(`.github/workflows/ci.yml`) rejoue ces trois étapes sur chaque
+poussée et pull request.
+
+## Bascule Supabase
+
+Déjà codée : `supabase/schema.sql` + `src/data/supabaseProvider.ts`
+(fetch/PostgREST, aucune dépendance). Elle s'active au build quand
+`VITE_SUPABASE_URL` et `VITE_SUPABASE_ANON_KEY` sont définies ; sinon
+les 5 fiches de démo servent de données. Réglages de lancement
+(WhatsApp équipe, URL publique) : `src/config.ts`. Guide de collecte
+terrain : `docs/collecte-fiches.md`.
